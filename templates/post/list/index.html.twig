@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List {{ type.plural }}{% endblock %}
+
+{% block body %}
+<h1>List {{ type.plural }}</h1>
+<a href="{{ path('post_create', {type:type}) }}" class="btn btn-primary">New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>View</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td><a href="{{ path('post_view', {'type': post.type, 'id': post.id}) }}" class="btn btn-primary">View</a></td>
+                <td><a href="{{ path('post_edit', {'type': post.type, 'id': post.id}) }}" class="btn btn-secondary">Edit</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,16 @@
+$theme-colors: (
+  "primary",
+  "secondary",
+  "success",
+  "danger",
+  "warning",
+  "info",
+);
+
+$enable-rounded: true;
+
+@mixin border-radius() {
+  @if $enable-rounded {
+    @apply rounded;
+  }
+}

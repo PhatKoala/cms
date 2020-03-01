@@ -1,0 +1,18 @@
+### macOS ###
+.DS_Store
+
+### PhpStorm ###
+.idea/
+
+### Composer ###
+/vendor/
+
+### dotenv ###
+.env
+
+### Symfony ###
+var/
+public/build/
+
+### Node ###
+node_modules/

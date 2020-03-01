@@ -1,0 +1,11 @@
+.alert {
+  @apply relative py-2 px-4 mb-2 border border-solid border-transparent;
+  @include border-radius();
+}
+
+@each $color in $theme-colors {
+  .alert-#{$color} {
+    //@apply bg-#{color}-500;
+    @apply bg-#{$color}-200 border-#{$color}-400 text-#{$color}-800;
+  }
+}

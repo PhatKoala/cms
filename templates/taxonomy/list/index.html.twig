@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List {{ type.plural }}{% endblock %}
+
+{% block body %}
+<h1>List {{ type.plural }}</h1>
+<a href="{{ path('taxonomy_create', {type:type}) }}" class="btn btn-primary">New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>View</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for taxonomy in taxonomys %}
+            <tr>
+                <td>{{ taxonomy.title }}</td>
+                <td><a href="{{ path('taxonomy_view', {'type': taxonomy.type, 'id': taxonomy.id}) }}" class="btn btn-primary">View</a></td>
+                <td><a href="{{ path('taxonomy_edit', {'type': taxonomy.type, 'id': taxonomy.id}) }}" class="btn btn-secondary">Edit</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
