@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/taxonomy/{type}/{id}/edit", name="taxonomy_edit", methods={"GET", "TAXONOMY"})
+ * @Route("/taxonomy/{type}/{id}/edit", name="taxonomy_edit", methods={"GET", "POST"})
  *
  * @Form(class=EditType::class, data="taxonomy")
  */

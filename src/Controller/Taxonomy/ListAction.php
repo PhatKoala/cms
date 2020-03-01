@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/taxonomy/{type}/list", name="taxonomy_list", methods={"GET", "TAXONOMY"})
+ * @Route("/taxonomy/{type}/list", name="taxonomy_list", methods={"GET", "POST"})
  *
  * @Form(class=ListType::class)
  */

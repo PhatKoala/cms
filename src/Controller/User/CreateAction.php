@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/{type}/create", name="user_create", methods={"GET", "USER"})
+ * @Route("/user/{type}/create", name="user_create", methods={"GET", "POST"})
  * @Form(class=CreateType::class)
  */
 class CreateAction extends AbstractController

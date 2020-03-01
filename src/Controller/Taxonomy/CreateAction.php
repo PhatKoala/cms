@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/taxonomy/{type}/create", name="taxonomy_create", methods={"GET", "TAXONOMY"})
+ * @Route("/taxonomy/{type}/create", name="taxonomy_create", methods={"GET", "POST"})
  * @Form(class=CreateType::class)
  */
 class CreateAction extends AbstractController

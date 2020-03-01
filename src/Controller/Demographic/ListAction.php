@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/demographic/{type}/list", name="demographic_list", methods={"GET", "DEMOGRAPHIC"})
+ * @Route("/demographic/{type}/list", name="demographic_list", methods={"GET", "POST"})
  *
  * @Form(class=ListType::class)
  */

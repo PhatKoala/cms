@@ -43,7 +43,9 @@ class CreateAction extends AbstractController
 
             $this->addFlash('success', sprintf('%s successfully created.', $type->getName()));
 
-            return $this->redirectToRoute('post_edit', ['id' => $post->getId(), 'type' => $type]);
+            return $this->redirectToRoute('post_edit', [
+                'id' => $post->getId(), 'type' => $type
+            ]);
         }
 
         return $this->render('post/create/index.html.twig', [

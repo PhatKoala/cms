@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/{type}/{id}/edit", name="user_edit", methods={"GET", "USER"})
+ * @Route("/user/{type}/{id}/edit", name="user_edit", methods={"GET", "POST"})
  *
  * @Form(class=EditType::class, data="user")
  */
