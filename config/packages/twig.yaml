@@ -1,4 +1,12 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_4_layout.html.twig']
+    paths:
+        # Default templates directory, since 3.4+
+        templates: ~
+
+        # Directory convention to override bundle templates, since 3.4+
+        # make sure to know the actual Twig namespace for each bundle.
+        # e.g. AcmeDemoBundle -> AcmeDemo:
+#        "@PhatKoalaDashboardBundle/Resources/views": PhatKoalaDashboardBundle
 
