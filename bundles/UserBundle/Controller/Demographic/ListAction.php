@@ -42,7 +42,7 @@ class ListAction extends AbstractController
 
         $demographics = $this->repository->query($query);
 
-        return $this->render('demographic/list/index.html.twig', [
+        return $this->render('@PhatKoalaUser/demographic/list/index.html.twig', [
             'type' => $type,
             'demographics' => $demographics,
         ]);

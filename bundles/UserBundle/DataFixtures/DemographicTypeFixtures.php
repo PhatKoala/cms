@@ -15,7 +15,7 @@ class DemographicTypeFixtures extends Fixture
     {
         $demographic = new DemographicType();
         $demographic->setType('membership');
-        $demographic->setTitle('Membership');
+        $demographic->setName('Membership');
         $demographic->setPlural('Memberships');
         $demographic->setIcon('fa fa-id-card');
         $demographic->setHierarchical(false);
@@ -25,7 +25,7 @@ class DemographicTypeFixtures extends Fixture
 
         $demographic = new DemographicType();
         $demographic->setType('company');
-        $demographic->setTitle('Company');
+        $demographic->setName('Company');
         $demographic->setPlural('Companies');
         $demographic->setIcon('fa fa-briefcase');
         $demographic->setHierarchical(false);

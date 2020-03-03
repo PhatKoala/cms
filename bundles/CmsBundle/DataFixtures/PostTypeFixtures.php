@@ -14,7 +14,7 @@ class PostTypeFixtures extends Fixture
     {
         $post = new PostType();
         $post->setType('blog');
-        $post->setTitle('Post');
+        $post->setName('Post');
         $post->setPlural('Posts');
         $post->setIcon('fa fa-newspaper');
         $post->setHierarchical(false);
@@ -24,7 +24,7 @@ class PostTypeFixtures extends Fixture
 
         $post = new PostType();
         $post->setType('page');
-        $post->setTitle('Page');
+        $post->setName('Page');
         $post->setPlural('Pages');
         $post->setIcon('fa fa-file');
         $post->setHierarchical(false);

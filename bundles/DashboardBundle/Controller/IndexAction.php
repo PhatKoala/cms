@@ -18,7 +18,7 @@ class IndexAction extends AbstractController
      */
     public function __invoke(): Response
     {
-        return $this->render('@PhatKoalaDashboard/dashboard/index/index.html.twig', [
+        return $this->render('@PhatKoalaDashboard/index/index.html.twig', [
 
         ]);
     }

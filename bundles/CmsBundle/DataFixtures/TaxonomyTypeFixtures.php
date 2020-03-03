@@ -14,7 +14,7 @@ class TaxonomyTypeFixtures extends Fixture
     {
         $taxonomy = new TaxonomyType();
         $taxonomy->setType('category');
-        $taxonomy->setTitle('Category');
+        $taxonomy->setName('Category');
         $taxonomy->setPlural('Categories');
         $taxonomy->setIcon('fa fa-folder-open');
         $taxonomy->setHierarchical(false);
@@ -23,7 +23,7 @@ class TaxonomyTypeFixtures extends Fixture
 
         $taxonomy = new TaxonomyType();
         $taxonomy->setType('tag');
-        $taxonomy->setTitle('Tag');
+        $taxonomy->setName('Tag');
         $taxonomy->setPlural('Tags');
         $taxonomy->setIcon('fa fa-tags');
         $taxonomy->setHierarchical(false);

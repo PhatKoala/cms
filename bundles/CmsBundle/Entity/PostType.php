@@ -20,7 +20,7 @@ class PostType
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $title = null;
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -28,9 +28,9 @@ class PostType
     private ?string $plural = null;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private ?string $icon = null;
+    private string $icon = 'fa fa-file';
 
     /**
      * @ORM\Column(type="boolean")
@@ -67,14 +67,14 @@ class PostType
         $this->icon = 'fa fa-page';
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(?string $title): self
+    public function setName(?string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }

@@ -30,7 +30,7 @@ class ViewAction extends AbstractController
      */
     public function __invoke(TaxonomyType $type, Taxonomy $taxonomy): Response
     {
-        return $this->render('taxonomy/view/index.html.twig', [
+        return $this->render('@PhatKoalaCms/taxonomy/view/index.html.twig', [
             'type' => $type,
             'taxonomy' => $taxonomy,
         ]);

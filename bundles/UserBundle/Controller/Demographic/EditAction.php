@@ -43,7 +43,7 @@ class EditAction extends AbstractController
             $this->addFlash('success', sprintf('%s successfully updated.', $type->getName()));
         }
 
-        return $this->render('demographic/edit/index.html.twig', [
+        return $this->render('@PhatKoalaUser/demographic/edit/index.html.twig', [
             'type' => $type,
             'form' => $form->createView()
         ]);

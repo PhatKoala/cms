@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhatKoala\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
 
 /**

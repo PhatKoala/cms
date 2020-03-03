@@ -22,9 +22,3 @@ services:
   PhatKoala\UserBundle\Controller\:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
-
-  # add more service definitions when explicit configuration is needed
-  # please note that last definitions always *replace* previous ones
-
-#twig:
-#  paths: ["@PhatKoalaUserBundle/Resource/views/templates"]

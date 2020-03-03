@@ -48,7 +48,7 @@ class CreateAction extends AbstractController
             ]);
         }
 
-        return $this->render('post/create/index.html.twig', [
+        return $this->render('@PhatKoalaCms/post/create/index.html.twig', [
             'type' => $type,
             'form' => $form->createView()
         ]);

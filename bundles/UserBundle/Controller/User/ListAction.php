@@ -42,7 +42,7 @@ class ListAction extends AbstractController
 
         $users = $this->repository->query($query);
 
-        return $this->render('user/list/index.html.twig', [
+        return $this->render('@PhatKoalaUser/user/list/index.html.twig', [
             'type' => $type,
             'users' => $users,
         ]);

@@ -30,7 +30,7 @@ class ViewAction extends AbstractController
      */
     public function __invoke(UserType $type, User $user): Response
     {
-        return $this->render('user/view/index.html.twig', [
+        return $this->render('@PhatKoalaUser/user/view/index.html.twig', [
             'type' => $type,
             'user' => $user,
         ]);

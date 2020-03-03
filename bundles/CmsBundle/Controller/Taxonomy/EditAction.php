@@ -43,7 +43,7 @@ class EditAction extends AbstractController
             $this->addFlash('success', sprintf('%s successfully updated.', $type->getName()));
         }
 
-        return $this->render('taxonomy/edit/index.html.twig', [
+        return $this->render('@PhatKoalaCms/taxonomy/edit/index.html.twig', [
             'type' => $type,
             'form' => $form->createView()
         ]);

@@ -30,7 +30,7 @@ class ViewAction extends AbstractController
      */
     public function __invoke(PostType $type, Post $post): Response
     {
-        return $this->render('post/view/index.html.twig', [
+        return $this->render('@PhatKoalaCms/post/view/index.html.twig', [
             'type' => $type,
             'post' => $post,
         ]);

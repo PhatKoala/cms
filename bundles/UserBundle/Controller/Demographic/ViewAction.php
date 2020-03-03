@@ -30,7 +30,7 @@ class ViewAction extends AbstractController
      */
     public function __invoke(DemographicType $type, Demographic $demographic): Response
     {
-        return $this->render('demographic/view/index.html.twig', [
+        return $this->render('@PhatKoalaUser/demographic/view/index.html.twig', [
             'type' => $type,
             'demographic' => $demographic,
         ]);

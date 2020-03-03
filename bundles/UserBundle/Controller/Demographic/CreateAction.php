@@ -46,7 +46,7 @@ class CreateAction extends AbstractController
             return $this->redirectToRoute('demographic_edit', ['id' => $demographic->getId(), 'type' => $type]);
         }
 
-        return $this->render('demographic/create/index.html.twig', [
+        return $this->render('@PhatKoalaUser/demographic/create/index.html.twig', [
             'type' => $type,
             'form' => $form->createView()
         ]);

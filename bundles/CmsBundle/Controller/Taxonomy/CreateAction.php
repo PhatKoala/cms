@@ -46,7 +46,7 @@ class CreateAction extends AbstractController
             return $this->redirectToRoute('taxonomy_edit', ['id' => $taxonomy->getId(), 'type' => $type]);
         }
 
-        return $this->render('taxonomy/create/index.html.twig', [
+        return $this->render('@PhatKoalaCms/taxonomy/create/index.html.twig', [
             'type' => $type,
             'form' => $form->createView()
         ]);

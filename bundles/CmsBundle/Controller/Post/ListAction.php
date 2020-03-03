@@ -42,7 +42,7 @@ class ListAction extends AbstractController
 
         $posts = $this->repository->query($query);
 
-        return $this->render('post/list/index.html.twig', [
+        return $this->render('@PhatKoalaCms/post/list/index.html.twig', [
             'type' => $type,
             'posts' => $posts,
         ]);

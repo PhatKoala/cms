@@ -41,7 +41,7 @@ class ListAction extends AbstractController
 
         $taxonomys = $this->repository->query($query);
 
-        return $this->render('taxonomy/list/index.html.twig', [
+        return $this->render('@PhatKoalaCms/taxonomy/list/index.html.twig', [
             'type' => $type,
             'taxonomys' => $taxonomys,
         ]);

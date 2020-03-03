@@ -46,7 +46,7 @@ class CreateAction extends AbstractController
             return $this->redirectToRoute('user_edit', ['id' => $user->getId(), 'type' => $type]);
         }
 
-        return $this->render('user/create/index.html.twig', [
+        return $this->render('@PhatKoalaUser/user/create/index.html.twig', [
             'type' => $type,
             'form' => $form->createView()
         ]);
