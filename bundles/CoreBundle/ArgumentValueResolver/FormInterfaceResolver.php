@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhatKoala\CoreBundle\ArgumentValueResolver;
 
-use PhatKoala\CoreBundle\Annotation\Form;
 use Generator;
 use InvalidArgumentException;
+use PhatKoala\CoreBundle\Annotation\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;

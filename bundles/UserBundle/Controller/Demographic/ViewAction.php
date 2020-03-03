@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Demographic;
+namespace PhatKoala\UserBundle\Controller\Demographic;
 
-use App\Entity\Demographic;
-use App\Entity\DemographicType;
-use App\Repository\DemographicRepository;
+use PhatKoala\UserBundle\Entity\Demographic;
+use PhatKoala\UserBundle\Entity\DemographicType;
+use PhatKoala\UserBundle\Repository\DemographicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

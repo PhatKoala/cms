@@ -2,24 +2,45 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace PhatKoala\UserBundle\Entity;
 
-use App\Entity\Traits\HasUi;
-use App\Entity\Traits\Icon;
-use App\Entity\Traits\IdType;
-use App\Entity\Traits\IsHierarchical;
-use App\Entity\Traits\Plural;
-use App\Entity\Traits\Title;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DemographicTypeRepository")
+ * @ORM\Entity(repositoryClass="PhatKoala\UserBundle\Repository\DemographicTypeRepository")
  */
 class DemographicType
 {
-    use IdType, Title, Plural, Icon,
-        IsHierarchical,
-        HasUi;
+    /**
+     * @ORM\Id()
+     * @ORM\Column(type="string", length=100)
+     */
+    private ?string $type = null;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $title = null;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $plural = null;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $icon = null;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $hierarchical = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $ui = false;
 
     /**
      * @ORM\Column(type="array")
@@ -29,6 +50,81 @@ class DemographicType
     public function __construct()
     {
         $this->icon = 'fa fa-user-tag';
+    }
+
+    public function __toString()
+    {
+        return $this->type;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getPlural(): ?string
+    {
+        return $this->plural;
+    }
+
+    public function setPlural(?string $plural): self
+    {
+        $this->plural = $plural;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(?string $icon): self
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function isHierarchical(): ?bool
+    {
+        return $this->hierarchical;
+    }
+
+    public function setHierarchical(bool $hierarchical): self
+    {
+        $this->hierarchical = $hierarchical;
+
+        return $this;
+    }
+
+    public function hasUi(): ?bool
+    {
+        return $this->ui;
+    }
+
+    public function setUi(bool $ui): self
+    {
+        $this->ui = $ui;
+
+        return $this;
     }
 
     /**

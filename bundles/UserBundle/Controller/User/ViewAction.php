@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\User;
+namespace PhatKoala\UserBundle\Controller\User;
 
-use App\Entity\User;
-use App\Entity\UserType;
-use App\Repository\UserRepository;
+use PhatKoala\UserBundle\Entity\User;
+use PhatKoala\UserBundle\Entity\UserType;
+use PhatKoala\UserBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhatKoala\CmsBundle;
+namespace PhatKoala\CoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PhatKoalaCmsBundle extends Bundle
+class PhatKoalaCoreBundle extends Bundle
 {
 
 }

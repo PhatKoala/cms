@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\DataFixtures;
 
-use PhatKoala\CmsBundle\Entity\Taxonomy;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use PhatKoala\CmsBundle\Entity\Taxonomy;
 
 class TaxonomyFixtures extends Fixture
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\User;
+namespace PhatKoala\UserBundle\Controller\User;
 
-use App\Annotation\Form;
-use App\Entity\User;
-use App\Entity\UserType;
-use App\Form\User\EditType;
-use App\Repository\UserRepository;
+use PhatKoala\CoreBundle\Annotation\Form;
+use PhatKoala\UserBundle\Entity\User;
+use PhatKoala\UserBundle\Entity\UserType;
+use PhatKoala\UserBundle\Form\User\EditType;
+use PhatKoala\UserBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;

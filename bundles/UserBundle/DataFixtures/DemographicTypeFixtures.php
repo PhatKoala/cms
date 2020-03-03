@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace PhatKoala\UserBundle\DataFixtures;
 
-use App\Entity\DemographicType;
-use App\Entity\TaxonomyType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use PhatKoala\UserBundle\Entity\DemographicType;
+use PhatKoala\UserBundle\Entity\TaxonomyType;
 
 class DemographicTypeFixtures extends Fixture
 {

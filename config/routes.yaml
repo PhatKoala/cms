@@ -1,3 +1,15 @@
+cms:
+  resource: '@PhatKoalaCmsBundle/Controller/'
+  type: annotation
+
+core:
+  resource: '@PhatKoalaCoreBundle/Controller/'
+  type: annotation
+
 dashboard:
   resource: '@PhatKoalaDashboardBundle/Controller/'
+  type: annotation
+
+user:
+  resource: '@PhatKoalaUserBundle/Controller/'
   type: annotation

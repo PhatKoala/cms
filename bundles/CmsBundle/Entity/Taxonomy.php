@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
 use PhatKoala\CoreBundle\Entity\Traits\Sluggable;
 use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
 use PhatKoala\CoreBundle\Entity\Traits\Tree;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="PhatKoala\CmsBundle\Repository\TaxonomyRepository")

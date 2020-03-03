@@ -16,7 +16,6 @@ class ListType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => true,
             'allow_extra_fields' => true,
-//            'factory' => fn(string $name, string $sku, int $quantity, float $price, Category $category) => new Product($name, $sku, $price, $category, $quantity),
         ]);
     }
 
@@ -24,8 +23,7 @@ class ListType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-//                'get_value' => fn(PostType $post) => $post->getTitle(),
-//                'update_value' => fn(string $title, PostType $post) => $post->setName($title),
+
             ])
         ;
     }

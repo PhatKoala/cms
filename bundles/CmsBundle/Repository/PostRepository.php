@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Repository;
 
-use PhatKoala\CmsBundle\Entity\Post;
-use PhatKoala\CmsBundle\Query\PostQuery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use PhatKoala\CmsBundle\Entity\Post;
+use PhatKoala\CmsBundle\Query\PostQuery;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

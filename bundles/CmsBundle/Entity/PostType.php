@@ -4,11 +4,6 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Entity;
 
-use PhatKoala\CmsBundle\Entity\Traits\HasUi;
-use PhatKoala\CmsBundle\Entity\Traits\Icon;
-use PhatKoala\CmsBundle\Entity\Traits\IsHierarchical;
-use PhatKoala\CmsBundle\Entity\Traits\Plural;
-use PhatKoala\CmsBundle\Entity\Traits\Title;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

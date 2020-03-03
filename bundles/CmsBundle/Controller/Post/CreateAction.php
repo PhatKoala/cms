@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Controller\Post;
 
-use PhatKoala\CoreBundle\Annotation\Form;
 use PhatKoala\CmsBundle\Entity\Post;
 use PhatKoala\CmsBundle\Entity\PostType;
 use PhatKoala\CmsBundle\Form\Post\CreateType;
 use PhatKoala\CmsBundle\Repository\PostRepository;
+use PhatKoala\CoreBundle\Annotation\Form;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repository;
+namespace PhatKoala\UserBundle\Repository;
 
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use PhatKoala\UserBundle\Entity\User;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Query\Criteria\Taxonomy;
 
+use Doctrine\ORM\QueryBuilder;
 use PhatKoala\CmsBundle\Query\CriteriaArrayInterface;
 use PhatKoala\CmsBundle\Query\CriteriaBuilderInterface;
 use PhatKoala\CmsBundle\Query\Criterion\String\EqualCriterion;
 use PhatKoala\CmsBundle\Query\Criterion\String\InCriterion;
 use PhatKoala\CmsBundle\Query\Criterion\String\NotEqualCriterion;
 use PhatKoala\CmsBundle\Query\Criterion\String\NotInCriterion;
-use Doctrine\ORM\QueryBuilder;
 
 class TypeCriteria implements CriteriaArrayInterface, CriteriaBuilderInterface
 {

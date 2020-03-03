@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Query\Criteria\Taxonomy;
 
+use Doctrine\ORM\QueryBuilder;
 use PhatKoala\CmsBundle\Query\Criterion\Int\EqualCriterion;
 use PhatKoala\CmsBundle\Query\Criterion\Int\InCriterion;
 use PhatKoala\CmsBundle\Query\Criterion\Int\NotEqualCriterion;
 use PhatKoala\CmsBundle\Query\Criterion\Int\NotInCriterion;
-use Doctrine\ORM\QueryBuilder;
 
 class IdCriteria
 {

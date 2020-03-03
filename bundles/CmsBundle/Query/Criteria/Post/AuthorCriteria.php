@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Query\Criteria\Post;
 
-use PhatKoala\CmsBundle\Entity\User;
 use Doctrine\ORM\QueryBuilder;
+use PhatKoala\CmsBundle\Entity\User;
 
 class AuthorCriteria
 {

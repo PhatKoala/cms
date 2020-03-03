@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Query;
 
+use Doctrine\ORM\QueryBuilder;
 use PhatKoala\CmsBundle\Query\Criteria\Taxonomy\IdCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Taxonomy\ParentCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Taxonomy\SlugCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Taxonomy\TitleCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Taxonomy\TypeCriteria;
-use Doctrine\ORM\QueryBuilder;
 
 class TaxonomyQuery
 {

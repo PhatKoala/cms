@@ -9,16 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- *
+ * @Route("/dashboard", name="dashboard", methods={"GET"})
  */
-class IndexController extends AbstractController
+class IndexAction extends AbstractController
 {
     /**
-     * @Route("/dashboard", name="dashboard", methods={"GET"})
-     *
      * @return Response
      */
-    public function indexAction(): Response
+    public function __invoke(): Response
     {
         return $this->render('@PhatKoalaDashboard/dashboard/index/index.html.twig', [
 

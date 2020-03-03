@@ -2,10 +2,10 @@
 
 namespace PhatKoala\CmsBundle\Repository;
 
-use PhatKoala\CmsBundle\Entity\Taxonomy;
-use PhatKoala\CmsBundle\Query\TaxonomyQuery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use PhatKoala\CmsBundle\Entity\Taxonomy;
+use PhatKoala\CmsBundle\Query\TaxonomyQuery;
 
 /**
  * @method Taxonomy|null find($id, $lockMode = null, $lockVersion = null)

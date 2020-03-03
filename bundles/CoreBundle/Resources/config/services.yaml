@@ -13,18 +13,12 @@ services:
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
-  PhatKoala\CmsBundle\:
+  PhatKoala\CoreBundle\:
     resource: '../../*'
     exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class
-  PhatKoala\CmsBundle\Controller\:
+  PhatKoala\CoreBundle\Controller\:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
-
-  # add more service definitions when explicit configuration is needed
-  # please note that last definitions always *replace* previous ones
-
-#twig:
-#  paths: ["@PhatKoalaCmsBundle/Resource/views/templates"]

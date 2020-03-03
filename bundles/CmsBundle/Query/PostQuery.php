@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Query;
 
+use Doctrine\ORM\QueryBuilder;
 use PhatKoala\CmsBundle\Query\Criteria\Post\AuthorCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Post\IdCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Post\ParentCriteria;
@@ -11,7 +12,6 @@ use PhatKoala\CmsBundle\Query\Criteria\Post\SlugCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Post\TaxonomyCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Post\TitleCriteria;
 use PhatKoala\CmsBundle\Query\Criteria\Post\TypeCriteria;
-use Doctrine\ORM\QueryBuilder;
 
 class PostQuery
 {

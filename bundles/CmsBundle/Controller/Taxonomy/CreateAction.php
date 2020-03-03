@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Controller\Taxonomy;
 
-use PhatKoala\CoreBundle\Annotation\Form;
 use PhatKoala\CmsBundle\Entity\Taxonomy;
 use PhatKoala\CmsBundle\Entity\TaxonomyType;
 use PhatKoala\CmsBundle\Form\Taxonomy\CreateType;
 use PhatKoala\CmsBundle\Repository\TaxonomyRepository;
+use PhatKoala\CoreBundle\Annotation\Form;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;

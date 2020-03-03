@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Demographic;
+namespace PhatKoala\UserBundle\Controller\Demographic;
 
-use App\Annotation\Form;
-use App\Entity\DemographicType;
-use App\Form\Demographic\ListType;
-use App\Query\DemographicQuery;
-use App\Repository\DemographicRepository;
+use PhatKoala\CoreBundle\Annotation\Form;
+use PhatKoala\UserBundle\Entity\DemographicType;
+use PhatKoala\UserBundle\Form\Demographic\ListType;
+use PhatKoala\UserBundle\Query\DemographicQuery;
+use PhatKoala\UserBundle\Repository\DemographicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;

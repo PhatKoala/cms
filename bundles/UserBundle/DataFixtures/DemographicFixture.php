@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataFixtures;
+namespace PhatKoala\UserBundle\DataFixtures;
 
-use App\Entity\Demographic;
-use App\Entity\Taxonomy;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use PhatKoala\UserBundle\Entity\Demographic;
+use PhatKoala\UserBundle\Entity\Taxonomy;
 
 class DemographicFixture extends Fixture
 {

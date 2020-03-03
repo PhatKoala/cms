@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repository;
+namespace PhatKoala\UserBundle\Repository;
 
-use App\Entity\Demographic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use PhatKoala\UserBundle\Entity\Demographic;
 
 /**
  * @method Demographic|null find($id, $lockMode = null, $lockVersion = null)
