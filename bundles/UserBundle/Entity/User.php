@@ -25,7 +25,7 @@ class User
     /**
      * @ORM\Column(type="string", length=128)
      */
-    private ?string $type;
+    private ?UserType $type;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -43,14 +43,12 @@ class User
     }
 
     /**
-     * @param string|object $type
+     * @param UserType $type
      * @return $this
      */
-    public function setType($type): self
+    public function setType(UserType $type): self
     {
-        if (is_string($type) || (is_object($type) && method_exists($type, '__toString' ))) {
-            $this->type = (string) $type;
-        }
+        $this->type = $type;
 
         return $this;
     }

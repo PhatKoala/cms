@@ -62,11 +62,6 @@ class PostType
      */
     private array $taxonomies = [ ];
 
-    public function __construct()
-    {
-        $this->icon = 'fa fa-page';
-    }
-
     public function getName(): ?string
     {
         return $this->name;

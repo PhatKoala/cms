@@ -27,9 +27,10 @@ class Taxonomy
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\ManyToOne(targetEntity="TaxonomyType")
+     * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?string $type;
+    private ?TaxonomyType $type;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -77,14 +78,12 @@ class Taxonomy
     }
 
     /**
-     * @param string|object $type
+     * @param TaxonomyType $type
      * @return $this
      */
-    public function setType($type): self
+    public function setType(TaxonomyType $type): self
     {
-        if (is_string($type) || (is_object($type) && method_exists($type, '__toString' ))) {
-            $this->type = (string) $type;
-        }
+        $this->type = $type;
 
         return $this;
     }

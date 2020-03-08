@@ -5,28 +5,38 @@ declare(strict_types=1);
 namespace PhatKoala\CmsBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhatKoala\CmsBundle\Entity\Taxonomy;
 
-class TaxonomyFixtures extends Fixture
+class TaxonomyFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function getDependencies()
+    {
+        return [
+            TaxonomyTypeFixtures::class,
+        ];
+    }
+
     public function load(ObjectManager $manager)
     {
-        foreach (['Tutorial', 'Review', 'News'] as $category) {
+        $category = $this->getReference('TaxonomyType::category');
+        foreach (['Tutorial', 'Review', 'News'] as $title) {
             $taxonomy = new Taxonomy();
-            $taxonomy->setType('category');
+            $taxonomy->setType($category);
             $taxonomy->setStatus('publish');
-            $taxonomy->setTitle($category);
-            $taxonomy->setContent(sprintf('My my description for my %s Category', $category));
+            $taxonomy->setTitle($title);
+            $taxonomy->setContent(sprintf('My my description for my %s Category', $title));
             $manager->persist($taxonomy);
         }
 
-        foreach (['HTML', 'CSS', 'PHP'] as $tag) {
+        $tag = $this->getReference('TaxonomyType::tag');
+        foreach (['HTML', 'CSS', 'PHP'] as $title) {
             $taxonomy = new Taxonomy();
-            $taxonomy->setType('tag');
+            $taxonomy->setType($tag);
             $taxonomy->setStatus('publish');
-            $taxonomy->setTitle($tag);
-            $taxonomy->setContent(sprintf('My my description for my %s Tag', $tag));
+            $taxonomy->setTitle($title);
+            $taxonomy->setContent(sprintf('My my description for my %s Tag', $title));
             $manager->persist($taxonomy);
         }
 

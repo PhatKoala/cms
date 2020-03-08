@@ -12,24 +12,26 @@ class PostTypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $post = new PostType();
-        $post->setType('blog');
-        $post->setName('Post');
-        $post->setPlural('Posts');
-        $post->setIcon('fa fa-newspaper');
-        $post->setHierarchical(false);
-        $post->setUi(true);
-        $post->setTaxonomies(['category', 'tag']);
-        $manager->persist($post);
+        $blog = new PostType();
+        $blog->setType('blog');
+        $blog->setName('Post');
+        $blog->setPlural('Posts');
+        $blog->setIcon('fa fa-newspaper');
+        $blog->setHierarchical(false);
+        $blog->setUi(true);
+        $blog->setTaxonomies(['category', 'tag']);
+        $manager->persist($blog);
+        $this->setReference('PostType::blog', $blog);
 
-        $post = new PostType();
-        $post->setType('page');
-        $post->setName('Page');
-        $post->setPlural('Pages');
-        $post->setIcon('fa fa-file');
-        $post->setHierarchical(false);
-        $post->setUi(true);
-        $manager->persist($post);
+        $page = new PostType();
+        $page->setType('page');
+        $page->setName('Page');
+        $page->setPlural('Pages');
+        $page->setIcon('fa fa-file');
+        $page->setHierarchical(false);
+        $page->setUi(true);
+        $manager->persist($page);
+        $this->setReference('PostType::page', $page);
 
         $manager->flush();
     }

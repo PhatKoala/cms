@@ -38,7 +38,6 @@ class ListAction extends AbstractController
         $query = new PostQuery([
             'type' => $type,
         ]);
-//        $query->type()->equal((string) $type);
 
         $posts = $this->repository->query($query);
 

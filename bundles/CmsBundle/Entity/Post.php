@@ -27,9 +27,10 @@ class Post
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\ManyToOne(targetEntity="PostType")
+     * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?string $type;
+    private ?PostType $type;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -76,20 +77,18 @@ class Post
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getType(): ?PostType
     {
         return $this->type;
     }
 
     /**
-     * @param string|object $type
+     * @param PostType $type
      * @return $this
      */
-    public function setType($type): self
+    public function setType(PostType $type): self
     {
-        if (is_string($type) || (is_object($type) && method_exists($type, '__toString' ))) {
-            $this->type = (string) $type;
-        }
+        $this->type = $type;
 
         return $this;
     }

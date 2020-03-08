@@ -27,9 +27,10 @@ class Demographic
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\ManyToOne(targetEntity="DemographicType")
+     * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?string $type;
+    private ?DemographicType $type;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -83,20 +84,18 @@ class Demographic
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getType(): ?DemographicType
     {
         return $this->type;
     }
 
     /**
-     * @param string|object $type
+     * @param DemographicType $type
      * @return $this
      */
-    public function setType($type): self
+    public function setType(DemographicType $type): self
     {
-        if (is_string($type) || (is_object($type) && method_exists($type, '__toString' ))) {
-            $this->type = (string) $type;
-        }
+        $this->type = $type;
 
         return $this;
     }

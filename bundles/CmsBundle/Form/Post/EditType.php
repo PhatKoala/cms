@@ -25,6 +25,9 @@ class EditType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var Post $post */
+        $post = $options['data'];
+
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Title',
@@ -58,5 +61,7 @@ class EditType extends AbstractType
                 ]
             ])
         ;
+
+//        foreach ($post->getTy)
     }
 }

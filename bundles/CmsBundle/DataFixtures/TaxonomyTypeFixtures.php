@@ -12,23 +12,25 @@ class TaxonomyTypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $taxonomy = new TaxonomyType();
-        $taxonomy->setType('category');
-        $taxonomy->setName('Category');
-        $taxonomy->setPlural('Categories');
-        $taxonomy->setIcon('fa fa-folder-open');
-        $taxonomy->setHierarchical(false);
-        $taxonomy->setUi(true);
-        $manager->persist($taxonomy);
+        $category = new TaxonomyType();
+        $category->setType('category');
+        $category->setName('Category');
+        $category->setPlural('Categories');
+        $category->setIcon('fa fa-folder-open');
+        $category->setHierarchical(false);
+        $category->setUi(true);
+        $manager->persist($category);
+        $this->setReference('TaxonomyType::category', $category);
 
-        $taxonomy = new TaxonomyType();
-        $taxonomy->setType('tag');
-        $taxonomy->setName('Tag');
-        $taxonomy->setPlural('Tags');
-        $taxonomy->setIcon('fa fa-tags');
-        $taxonomy->setHierarchical(false);
-        $taxonomy->setUi(true);
-        $manager->persist($taxonomy);
+        $tag = new TaxonomyType();
+        $tag->setType('tag');
+        $tag->setName('Tag');
+        $tag->setPlural('Tags');
+        $tag->setIcon('fa fa-tags');
+        $tag->setHierarchical(false);
+        $tag->setUi(true);
+        $manager->persist($tag);
+        $this->setReference('TaxonomyType::tag', $tag);
 
         $manager->flush();
     }

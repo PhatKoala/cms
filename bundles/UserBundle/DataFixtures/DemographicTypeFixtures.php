@@ -13,24 +13,26 @@ class DemographicTypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $demographic = new DemographicType();
-        $demographic->setType('membership');
-        $demographic->setName('Membership');
-        $demographic->setPlural('Memberships');
-        $demographic->setIcon('fa fa-id-card');
-        $demographic->setHierarchical(false);
-        $demographic->setUi(true);
-        $demographic->setDemographics(['company']);
-        $manager->persist($demographic);
+        $membership = new DemographicType();
+        $membership->setType('membership');
+        $membership->setName('Membership');
+        $membership->setPlural('Memberships');
+        $membership->setIcon('fa fa-id-card');
+        $membership->setHierarchical(false);
+        $membership->setUi(true);
+        $membership->setDemographics(['company']);
+        $manager->persist($membership);
+        $this->setReference('DemographicType::membership', $membership);
 
-        $demographic = new DemographicType();
-        $demographic->setType('company');
-        $demographic->setName('Company');
-        $demographic->setPlural('Companies');
-        $demographic->setIcon('fa fa-briefcase');
-        $demographic->setHierarchical(false);
-        $demographic->setUi(true);
-        $manager->persist($demographic);
+        $company = new DemographicType();
+        $company->setType('company');
+        $company->setName('Company');
+        $company->setPlural('Companies');
+        $company->setIcon('fa fa-briefcase');
+        $company->setHierarchical(false);
+        $company->setUi(true);
+        $manager->persist($company);
+        $this->setReference('DemographicType::company', $company);
 
         $manager->flush();
     }

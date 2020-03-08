@@ -37,4 +37,4 @@ Permissions
 - Need permissions on a post tyep
 - Then specific permissions on posts
 
-# 
+Install a theme that implements a "front controller"

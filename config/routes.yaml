@@ -1,6 +1,7 @@
 cms:
   resource: '@PhatKoalaCmsBundle/Controller/'
   type: annotation
+#  prefix: /foo
 
 core:
   resource: '@PhatKoalaCoreBundle/Controller/'
