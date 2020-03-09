@@ -5,11 +5,19 @@ declare(strict_types=1);
 namespace PhatKoala\CmsBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhatKoala\CmsBundle\Entity\PostType;
 
-class PostTypeFixtures extends Fixture
+class PostTypeFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function getDependencies()
+    {
+        return [
+            TaxonomyTypeFixtures::class,
+        ];
+    }
+
     public function load(ObjectManager $manager)
     {
         $blog = new PostType();
@@ -19,7 +27,8 @@ class PostTypeFixtures extends Fixture
         $blog->setIcon('fa fa-newspaper');
         $blog->setHierarchical(false);
         $blog->setUi(true);
-        $blog->setTaxonomies(['category', 'tag']);
+        $blog->getTaxonomies()->add($this->getReference('TaxonomyType::category'));
+        $blog->getTaxonomies()->add($this->getReference('TaxonomyType::tag'));
         $manager->persist($blog);
         $this->setReference('PostType::blog', $blog);
 

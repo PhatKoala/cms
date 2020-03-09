@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/post/{type}/create", name="post_create", methods={"GET", "POST"})
- * @Form(class=CreateType::class)
  */
 class CreateAction extends AbstractController
 {
@@ -29,18 +28,15 @@ class CreateAction extends AbstractController
 
     /**
      * @param PostType $type
-     * @param FormInterface<CreateType> $form
      * @return Response
      */
-    public function __invoke(PostType $type, FormInterface $form): Response
+    public function __invoke(PostType $type): Response
     {
+        $post = new Post($type);
+        $form = $this->createForm(CreateType::class, $post);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Post $post */
-            $post = $form->getData();
-            $post->setType($type);
-
             $this->repository->save($post);
-
             $this->addFlash('success', sprintf('%s successfully created.', $type->getName()));
 
             return $this->redirectToRoute('post_edit', [

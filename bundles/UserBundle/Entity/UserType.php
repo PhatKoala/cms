@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhatKoala\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,9 +39,13 @@ class UserType
     private bool $ui = false;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\ManyToMany(targetEntity="DemographicType")
+     * @ORM\JoinTable(name="user_type_demographic_type",
+     *     joinColumns={@ORM\JoinColumn(name="user_type", referencedColumnName="type")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="demographic_type", referencedColumnName="type")}
+     * )
      */
-    private array $demographics = [ ];
+    private ArrayCollection $demographics;
 
     public function __toString()
     {
@@ -106,17 +111,17 @@ class UserType
     }
 
     /**
-     * @return array
+     * @return ArrayCollection
      */
-    public function getDemographics(): array
+    public function getDemographics(): ArrayCollection
     {
         return $this->demographics;
     }
 
     /**
-     * @param array $demographics
+     * @param ArrayCollection $demographics
      */
-    public function setDemographics(array $demographics): void
+    public function setDemographics(ArrayCollection $demographics): void
     {
         $this->demographics = $demographics;
     }

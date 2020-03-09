@@ -22,8 +22,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
     {
         $blog = $this->getReference('PostType::blog');
         for ($i = 1; $i <= 3; $i++) {
-            $post = new Post();
-            $post->setType($blog);
+            $post = new Post($blog);
             $post->setStatus('publish');
             $post->setTitle(sprintf('My Blog Post Title %d', $i));
             $post->setContent(sprintf('This is the blog post content for blog post %d', $i));
@@ -32,8 +31,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
 
         $page = $this->getReference('PostType::page');
         for ($i = 1; $i <= 3; $i++) {
-            $post = new Post();
-            $post->setType($page);
+            $post = new Post($page);
             $post->setStatus('publish');
             $post->setTitle(sprintf('My Page Title %d', $i));
             $post->setContent(sprintf('This is the page content for page %d', $i));

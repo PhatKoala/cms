@@ -72,6 +72,11 @@ class Post
      */
     private $children;
 
+    public function __construct(PostType $type)
+    {
+        $this->type = $type;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

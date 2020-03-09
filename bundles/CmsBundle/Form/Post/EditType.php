@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhatKoala\CmsBundle\Form\Post;
 
 use PhatKoala\CmsBundle\Entity\Post;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -62,6 +63,11 @@ class EditType extends AbstractType
             ])
         ;
 
-//        foreach ($post->getTy)
+        foreach ($post->getType()->getTaxonomies() as $taxonomy) {
+//            $builder
+//                ->add(sprintf('taxonomy_%s', $taxonomy), EntityType::class, [
+//                    'class' =>
+//                ]);
+        }
     }
 }

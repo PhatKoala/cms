@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="PhatKoala\CmsBundle\Repository\PostTypeRepository")
@@ -42,6 +45,20 @@ class PostType
      */
     private bool $ui = false;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="TaxonomyType")
+     * @ORM\JoinTable(name="post_type_taxonomy_type",
+     *     joinColumns={@ORM\JoinColumn(name="post_type", referencedColumnName="type")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="taxonomy_type", referencedColumnName="type")}
+     * )
+     */
+    private Collection $taxonomies;
+
+    public function __construct()
+    {
+        $this->taxonomies = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return $this->type;
@@ -56,11 +73,6 @@ class PostType
     {
         $this->type = $type;
     }
-
-    /**
-     * @ORM\Column(type="array")
-     */
-    private array $taxonomies = [ ];
 
     public function getName(): ?string
     {
@@ -123,17 +135,17 @@ class PostType
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getTaxonomies(): array
+    public function getTaxonomies(): Collection
     {
         return $this->taxonomies;
     }
 
     /**
-     * @param array $taxonomies
+     * @param Collection $taxonomies
      */
-    public function setTaxonomies(array $taxonomies): void
+    public function setTaxonomies(Collection $taxonomies): void
     {
         $this->taxonomies = $taxonomies;
     }
