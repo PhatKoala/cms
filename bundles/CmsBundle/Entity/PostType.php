@@ -135,7 +135,7 @@ class PostType
     }
 
     /**
-     * @return Collection
+     * @return Collection<TaxonomyType>
      */
     public function getTaxonomies(): Collection
     {
