@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Form\Taxonomy;
 
-use PhatKoala\CmsBundle\Entity\Taxonomy;
+use PhatKoala\CmsBundle\Entity\Term;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,7 +17,7 @@ class EditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Taxonomy::class,
+            'data_class' => Term::class,
             'csrf_protection' => true,
             'allow_extra_fields' => true,
         ]);

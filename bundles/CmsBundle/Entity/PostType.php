@@ -46,7 +46,9 @@ class PostType
     private bool $ui = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="TaxonomyType")
+     * @var Collection<Taxonomy>
+     *
+     * @ORM\ManyToMany(targetEntity="Taxonomy")
      * @ORM\JoinTable(name="post_type_taxonomy_type",
      *     joinColumns={@ORM\JoinColumn(name="post_type", referencedColumnName="type")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="taxonomy_type", referencedColumnName="type")}
@@ -69,7 +71,7 @@ class PostType
         return $this->type;
     }
 
-    public function setType(string $type): void
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }
@@ -79,11 +81,9 @@ class PostType
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(?string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     public function getPlural(): ?string
@@ -91,60 +91,46 @@ class PostType
         return $this->plural;
     }
 
-    public function setPlural(?string $plural): self
+    public function setPlural(?string $plural): void
     {
         $this->plural = $plural;
-
-        return $this;
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return $this->icon;
     }
 
-    public function setIcon(?string $icon): self
+    public function setIcon(string $icon): void
     {
         $this->icon = $icon;
-
-        return $this;
     }
 
-    public function hasUi(): ?bool
-    {
-        return $this->ui;
-    }
-
-    public function setUi(bool $ui): self
-    {
-        $this->ui = $ui;
-
-        return $this;
-    }
-
-    public function isHierarchical(): ?bool
+    public function isHierarchical(): bool
     {
         return $this->hierarchical;
     }
 
-    public function setHierarchical(bool $hierarchical): self
+    public function setHierarchical(bool $hierarchical): void
     {
         $this->hierarchical = $hierarchical;
-
-        return $this;
     }
 
-    /**
-     * @return Collection<TaxonomyType>
-     */
+    public function hasUi(): bool
+    {
+        return $this->ui;
+    }
+
+    public function setUi(bool $ui): void
+    {
+        $this->ui = $ui;
+    }
+
     public function getTaxonomies(): Collection
     {
         return $this->taxonomies;
     }
 
-    /**
-     * @param Collection $taxonomies
-     */
     public function setTaxonomies(Collection $taxonomies): void
     {
         $this->taxonomies = $taxonomies;

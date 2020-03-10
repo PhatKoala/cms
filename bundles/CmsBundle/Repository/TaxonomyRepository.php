@@ -5,7 +5,6 @@ namespace PhatKoala\CmsBundle\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhatKoala\CmsBundle\Entity\Taxonomy;
-use PhatKoala\CmsBundle\Query\TaxonomyQuery;
 
 /**
  * @method Taxonomy|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,20 +19,10 @@ class TaxonomyRepository extends ServiceEntityRepository
         parent::__construct($registry, Taxonomy::class);
     }
 
-    public function query(TaxonomyQuery $query)
-    {
-        $builder = $this->createQueryBuilder('taxonomy');
-        $query->build($builder);
-
-        return $builder
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function save(Taxonomy $taxonomy, $flush = true)
+    public function save(Taxonomy $type, $flush = true)
     {
         $manager = $this->getEntityManager();
-        $manager->persist($taxonomy);
+        $manager->persist($type);
 
         if (true == $flush) {
             $manager->flush();

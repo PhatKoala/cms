@@ -14,7 +14,7 @@ class PostTypeFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            TaxonomyTypeFixtures::class,
+            TaxonomyFixtures::class,
         ];
     }
 
@@ -27,8 +27,8 @@ class PostTypeFixtures extends Fixture implements DependentFixtureInterface
         $blog->setIcon('fa fa-newspaper');
         $blog->setHierarchical(false);
         $blog->setUi(true);
-        $blog->getTaxonomies()->add($this->getReference('TaxonomyType::category'));
-        $blog->getTaxonomies()->add($this->getReference('TaxonomyType::tag'));
+        $blog->getTaxonomies()->add($this->getReference('Taxonomy::category'));
+        $blog->getTaxonomies()->add($this->getReference('Taxonomy::tag'));
         $manager->persist($blog);
         $this->setReference('PostType::blog', $blog);
 

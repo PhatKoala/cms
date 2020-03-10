@@ -4,72 +4,55 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
-use PhatKoala\CoreBundle\Entity\Traits\Sluggable;
-use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
-use PhatKoala\CoreBundle\Entity\Traits\Tree;
 
 /**
  * @ORM\Entity(repositoryClass="PhatKoala\CmsBundle\Repository\TaxonomyRepository")
- * @Gedmo\Tree()
  */
 class Taxonomy
 {
-    use Prioritise, Sluggable, Timestampable, Tree;
-
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=100)
      */
-    private ?int $id = null;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="TaxonomyType")
-     * @ORM\JoinColumn(name="type", referencedColumnName="type")
-     */
-    private ?TaxonomyType $type;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private ?string $status = null;
+    private ?string $type = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $title = null;
+    private ?string $name = null;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $content = null;
+    private ?string $plural = null;
 
     /**
-     * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="Taxonomy")
-     * @ORM\JoinColumn(name="tree_root", referencedColumnName="id")
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private $root;
+    private string $icon = 'fa fa-folder';
 
     /**
-     * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Taxonomy", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\Column(type="boolean")
      */
-    private $parent;
+    private bool $hierarchical = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="Taxonomy", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
+     * @ORM\Column(type="boolean")
      */
-    private $children;
+    private bool $ui = false;
 
-    public function getId(): ?int
+    /**
+     * @var Collection<Term>
+     *
+     * @ORM\OneToMany(targetEntity="Term", mappedBy="taxonomy")
+     */
+    private Collection $terms;
+
+    public function __toString()
     {
-        return $this->id;
+        return $this->type;
     }
 
     public function getType(): ?string
@@ -77,98 +60,68 @@ class Taxonomy
         return $this->type;
     }
 
-    /**
-     * @param TaxonomyType $type
-     * @return $this
-     */
-    public function setType(TaxonomyType $type): self
+    public function setType(?string $type): void
     {
         $this->type = $type;
-
-        return $this;
     }
 
-    public function getStatus(): ?string
+    public function getName(): ?string
     {
-        return $this->status;
+        return $this->name;
     }
 
-    public function setStatus(?string $status): self
+    public function setName(?string $name): void
     {
-        $this->status = $status;
-
-        return $this;
+        $this->name = $name;
     }
 
-    public function getTitle(): ?string
+    public function getPlural(): ?string
     {
-        return $this->title;
+        return $this->plural;
     }
 
-    public function setTitle(?string $title): self
+    public function setPlural(?string $plural): void
     {
-        $this->title = $title;
-
-        return $this;
+        $this->plural = $plural;
     }
 
-    public function getContent(): ?string
+    public function getIcon(): string
     {
-        return $this->content;
+        return $this->icon;
     }
 
-    public function setContent(?string $content): self
+    public function setIcon(string $icon): void
     {
-        $this->content = $content;
-
-        return $this;
+        $this->icon = $icon;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRoot()
+    public function isHierarchical(): bool
     {
-        return $this->root;
+        return $this->hierarchical;
     }
 
-    /**
-     * @param mixed $root
-     */
-    public function setRoot($root): void
+    public function setHierarchical(bool $hierarchical): void
     {
-        $this->root = $root;
+        $this->hierarchical = $hierarchical;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getParent()
+    public function hasUi(): bool
     {
-        return $this->parent;
+        return $this->ui;
     }
 
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent): void
+    public function setUi(bool $ui): void
     {
-        $this->parent = $parent;
+        $this->ui = $ui;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChildren()
+    public function getTerms(): Collection
     {
-        return $this->children;
+        return $this->terms;
     }
 
-    /**
-     * @param mixed $children
-     */
-    public function setChildren($children): void
+    public function setTerms(Collection $terms): void
     {
-        $this->children = $children;
+        $this->terms = $terms;
     }
 }

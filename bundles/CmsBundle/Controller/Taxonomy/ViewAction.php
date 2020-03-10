@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Controller\Taxonomy;
 
+use PhatKoala\CmsBundle\Entity\Term;
 use PhatKoala\CmsBundle\Entity\Taxonomy;
-use PhatKoala\CmsBundle\Entity\TaxonomyType;
-use PhatKoala\CmsBundle\Repository\TaxonomyRepository;
+use PhatKoala\CmsBundle\Repository\TermRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,19 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ViewAction extends AbstractController
 {
-    private TaxonomyRepository $repository;
+    private TermRepository $repository;
 
-    public function __construct(TaxonomyRepository $repository)
+    public function __construct(TermRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * @param TaxonomyType $type
-     * @param Taxonomy $taxonomy
+     * @param Taxonomy $type
+     * @param Term $taxonomy
      * @return Response
      */
-    public function __invoke(TaxonomyType $type, Taxonomy $taxonomy): Response
+    public function __invoke(Taxonomy $type, Term $taxonomy): Response
     {
         return $this->render('@PhatKoalaCms/taxonomy/view/index.html.twig', [
             'type' => $type,

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PhatKoala\CmsBundle\Form\Post;
 
 use PhatKoala\CmsBundle\Entity\Post;
-use PhatKoala\CmsBundle\Entity\Taxonomy;
-use PhatKoala\CmsBundle\Repository\TaxonomyRepository;
+use PhatKoala\CmsBundle\Entity\Term;
+use PhatKoala\CmsBundle\Repository\TermRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -69,12 +69,12 @@ class EditType extends AbstractType
             $builder
                 ->add(sprintf('taxonomy_%s', $taxonomy->getType()), EntityType::class, [
                     'label' => $taxonomy->getName(),
-                    'class' => Taxonomy::class,
-                    'query_builder' => function (TaxonomyRepository $repository) use ($taxonomy) {
+                    'class' => Term::class,
+                    'query_builder' => function (TermRepository $repository) use ($taxonomy) {
                         return $repository
                             ->createQueryBuilder('term')
-                            ->andWhere('term.type = :type')
-                            ->setParameter('type', $taxonomy);
+                            ->andWhere('term.taxonomy = :taxonomy')
+                            ->setParameter('taxonomy', $taxonomy);
                     },
                     'choice_label' => 'title',
                     'mapped' => false,

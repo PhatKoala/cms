@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Controller\Taxonomy;
 
+use PhatKoala\CmsBundle\Entity\Term;
 use PhatKoala\CmsBundle\Entity\Taxonomy;
-use PhatKoala\CmsBundle\Entity\TaxonomyType;
 use PhatKoala\CmsBundle\Form\Taxonomy\CreateType;
-use PhatKoala\CmsBundle\Repository\TaxonomyRepository;
+use PhatKoala\CmsBundle\Repository\TermRepository;
 use PhatKoala\CoreBundle\Annotation\Form;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -20,22 +20,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateAction extends AbstractController
 {
-    private TaxonomyRepository $repository;
+    private TermRepository $repository;
 
-    public function __construct(TaxonomyRepository $repository)
+    public function __construct(TermRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * @param TaxonomyType $type
+     * @param Taxonomy $type
      * @param FormInterface<CreateType> $form
      * @return Response
      */
-    public function __invoke(TaxonomyType $type, FormInterface $form): Response
+    public function __invoke(Taxonomy $type, FormInterface $form): Response
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Taxonomy $taxonomy */
+            /** @var Term $taxonomy */
             $taxonomy = $form->getData();
             $taxonomy->setType($type);
 

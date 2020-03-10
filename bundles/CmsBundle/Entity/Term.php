@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,10 +13,10 @@ use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
 use PhatKoala\CoreBundle\Entity\Traits\Tree;
 
 /**
- * @ORM\Entity(repositoryClass="PhatKoala\CmsBundle\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="PhatKoala\CmsBundle\Repository\TermRepository")
  * @Gedmo\Tree()
  */
-class Post
+class Term
 {
     use Prioritise, Sluggable, Timestampable, Tree;
 
@@ -29,10 +28,10 @@ class Post
     private ?int $id = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PostType")
+     * @ORM\ManyToOne(targetEntity="Taxonomy")
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?PostType $type;
+    private ?Taxonomy $taxonomy;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -50,49 +49,30 @@ class Post
     private ?string $content = null;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private ?string $excerpt = null;
-
-    /**
-     * @var Collection<Term>
-     *
-     * @ORM\ManyToMany(targetEntity="Term")
-     * @ORM\JoinTable(name="post_term",
-     *     joinColumns={@ORM\JoinColumn(name="post", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="term", referencedColumnName="id")}
-     * )
-     */
-    private Collection $terms;
-
-    /**
      * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="Post")
+     * @ORM\ManyToOne(targetEntity="Term")
      * @ORM\JoinColumn(name="tree_root", referencedColumnName="id")
      */
-    private ?Post $root = null;
+    private ?Term $root;
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Term", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
-    private ?Post $parent = null;
+    private ?Term $parent;
 
     /**
      * @var Collection<Term>
      *
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Term", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private Collection $children;
 
-    public function __construct(PostType $type)
+    public function __construct(Taxonomy $taxonomy)
     {
-        $this->type = $type;
-
-        $this->terms = new ArrayCollection();
-        $this->children = new ArrayCollection();
+        $this->taxonomy = $taxonomy;
     }
 
     public function __toString()
@@ -105,14 +85,20 @@ class Post
         return $this->id;
     }
 
-    public function getType(): ?PostType
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(?PostType $type): void
+    /**
+     * @param Taxonomy $type
+     * @return $this
+     */
+    public function setType(Taxonomy $type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
     public function getStatus(): ?string
@@ -120,9 +106,11 @@ class Post
         return $this->status;
     }
 
-    public function setStatus(?string $status): void
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -130,9 +118,11 @@ class Post
         return $this->title;
     }
 
-    public function setTitle(?string $title): void
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function getContent(): ?string
@@ -140,57 +130,57 @@ class Post
         return $this->content;
     }
 
-    public function setContent(?string $content): void
+    public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
     }
 
-    public function getExcerpt(): ?string
-    {
-        return $this->excerpt;
-    }
-
-    public function setExcerpt(?string $excerpt): void
-    {
-        $this->excerpt = $excerpt;
-    }
-
-    public function getTerms(): Collection
-    {
-        return $this->terms;
-    }
-
-    public function setTerms(Collection $terms): void
-    {
-        $this->terms = $terms;
-    }
-
-    public function getRoot(): ?Post
+    /**
+     * @return mixed
+     */
+    public function getRoot()
     {
         return $this->root;
     }
 
-    public function setRoot(?Post $root): void
+    /**
+     * @param mixed $root
+     */
+    public function setRoot($root): void
     {
         $this->root = $root;
     }
 
-    public function getParent(): ?Post
+    /**
+     * @return mixed
+     */
+    public function getParent()
     {
         return $this->parent;
     }
 
-    public function setParent(?Post $parent): void
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent): void
     {
         $this->parent = $parent;
     }
 
-    public function getChildren(): Collection
+    /**
+     * @return mixed
+     */
+    public function getChildren()
     {
         return $this->children;
     }
 
-    public function setChildren(Collection $children): void
+    /**
+     * @param mixed $children
+     */
+    public function setChildren($children): void
     {
         $this->children = $children;
     }
