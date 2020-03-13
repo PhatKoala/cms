@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhatKoala\CmsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,17 +17,17 @@ class Taxonomy
      * @ORM\Id()
      * @ORM\Column(type="string", length=100)
      */
-    private ?string $type = null;
+    private string $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $name = null;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $plural = null;
+    private string $plural;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
@@ -50,37 +51,54 @@ class Taxonomy
      */
     private Collection $terms;
 
+    public function __construct(string $type, string $name = '', string $plural = '')
+    {
+        $this->setType($type);
+
+        if (empty($name)) {
+            $name = ucfirst($type);
+        }
+        $this->setName($name);
+
+        if (empty($plural)) {
+            $plural = sprintf('%ss', $name);
+        }
+        $this->setPlural($plural);
+
+        $this->terms = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return $this->type;
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(?string $type): void
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getPlural(): ?string
+    public function getPlural(): string
     {
         return $this->plural;
     }
 
-    public function setPlural(?string $plural): void
+    public function setPlural(string $plural): void
     {
         $this->plural = $plural;
     }
@@ -105,7 +123,7 @@ class Taxonomy
         $this->hierarchical = $hierarchical;
     }
 
-    public function hasUi(): bool
+    public function isUi(): bool
     {
         return $this->ui;
     }

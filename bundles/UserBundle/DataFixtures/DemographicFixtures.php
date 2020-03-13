@@ -6,14 +6,14 @@ namespace PhatKoala\UserBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use PhatKoala\UserBundle\Entity\DemographicType;
+use PhatKoala\UserBundle\Entity\Demographic;
 use PhatKoala\UserBundle\Entity\TaxonomyType;
 
-class DemographicTypeFixtures extends Fixture
+class DemographicFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $membership = new DemographicType();
+        $membership = new Demographic();
         $membership->setType('membership');
         $membership->setName('Membership');
         $membership->setPlural('Memberships');
@@ -22,9 +22,9 @@ class DemographicTypeFixtures extends Fixture
         $membership->setUi(true);
         $membership->setDemographics(['company']);
         $manager->persist($membership);
-        $this->setReference('DemographicType::membership', $membership);
+        $this->setReference('Demographic::membership', $membership);
 
-        $company = new DemographicType();
+        $company = new Demographic();
         $company->setType('company');
         $company->setName('Company');
         $company->setPlural('Companies');
@@ -32,7 +32,7 @@ class DemographicTypeFixtures extends Fixture
         $company->setHierarchical(false);
         $company->setUi(true);
         $manager->persist($company);
-        $this->setReference('DemographicType::company', $company);
+        $this->setReference('Demographic::company', $company);
 
         $manager->flush();
     }

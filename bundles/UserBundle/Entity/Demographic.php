@@ -5,170 +5,136 @@ declare(strict_types=1);
 namespace PhatKoala\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
-use PhatKoala\CoreBundle\Entity\Traits\Sluggable;
-use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
-use PhatKoala\CoreBundle\Entity\Traits\Tree;
 
 /**
- * @ORM\Entity(repositoryClass="PhatKoala\UserBundle\Repository\DemographicRepository")
- * @Gedmo\Tree()
+ * @ORM\Entity(repositoryClass="DemographicRepository")
  */
 class Demographic
 {
-    use Prioritise, Sluggable, Timestampable, Tree;
-
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=100)
      */
-    private ?int $id = null;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="DemographicType")
-     * @ORM\JoinColumn(name="type", referencedColumnName="type")
-     */
-    private ?DemographicType $type;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private ?string $status = null;
+    private ?string $type = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $title = null;
+    private ?string $name = null;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $content = null;
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
+    private ?string $plural = null;
 
     /**
-     * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="Demographic")
-     * @ORM\JoinColumn(name="tree_root", referencedColumnName="id")
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private $root;
+    private ?string $icon = 'fa fa-tag';
 
     /**
-     * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Demographic", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\Column(type="boolean")
      */
-    private $parent;
+    private bool $hierarchical = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="Demographic", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
+     * @ORM\Column(type="boolean")
      */
-    private $children;
+    private bool $ui = false;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\Column(type="array")
+     */
+    private array $demographics = [ ];
 
-    public function getType(): ?DemographicType
+    public function __toString()
     {
         return $this->type;
     }
 
-    /**
-     * @param DemographicType $type
-     * @return $this
-     */
-    public function setType(DemographicType $type): self
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
     {
         $this->type = $type;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getPlural(): ?string
     {
-        return $this->status;
+        return $this->plural;
     }
 
-    public function setStatus(?string $status): self
+    public function setPlural(?string $plural): self
     {
-        $this->status = $status;
+        $this->plural = $plural;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getIcon(): ?string
     {
-        return $this->title;
+        return $this->icon;
     }
 
-    public function setTitle(?string $title): self
+    public function setIcon(?string $icon): self
     {
-        $this->title = $title;
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function isHierarchical(): ?bool
+    {
+        return $this->hierarchical;
+    }
+
+    public function setHierarchical(bool $hierarchical): self
+    {
+        $this->hierarchical = $hierarchical;
+
+        return $this;
+    }
+
+    public function hasUi(): ?bool
+    {
+        return $this->ui;
+    }
+
+    public function setUi(bool $ui): self
+    {
+        $this->ui = $ui;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getRoot()
+    public function getDemographics(): array
     {
-        return $this->root;
+        return $this->demographics;
     }
 
     /**
-     * @param mixed $root
+     * @param array $demographics
      */
-    public function setRoot($root): void
+    public function setDemographics(array $demographics): void
     {
-        $this->root = $root;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
-     * @param mixed $children
-     */
-    public function setChildren($children): void
-    {
-        $this->children = $children;
+        $this->demographics = $demographics;
     }
 }

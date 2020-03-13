@@ -32,27 +32,27 @@ class Post
      * @ORM\ManyToOne(targetEntity="PostType")
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?PostType $type;
+    private PostType $type;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private ?string $status = null;
+    private string $status = 'draft';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $title = null;
+    private string $title = '';
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $content = null;
+    private string $content = '';
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $excerpt = null;
+    private string $excerpt = '';
 
     /**
      * @var Collection<Term>
@@ -105,52 +105,52 @@ class Post
         return $this->id;
     }
 
-    public function getType(): ?PostType
+    public function getType(): PostType
     {
         return $this->type;
     }
 
-    public function setType(?PostType $type): void
+    public function setType(PostType $type): void
     {
         $this->type = $type;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle(?string $title): void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent(?string $content): void
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
-    public function getExcerpt(): ?string
+    public function getExcerpt(): string
     {
         return $this->excerpt;
     }
 
-    public function setExcerpt(?string $excerpt): void
+    public function setExcerpt(string $excerpt): void
     {
         $this->excerpt = $excerpt;
     }

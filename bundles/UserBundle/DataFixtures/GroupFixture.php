@@ -7,23 +7,23 @@ namespace PhatKoala\UserBundle\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use PhatKoala\UserBundle\Entity\Demographic;
+use PhatKoala\UserBundle\Entity\Group;
 use PhatKoala\UserBundle\Entity\Taxonomy;
 
-class DemographicFixture extends Fixture implements DependentFixtureInterface
+class GroupFixture extends Fixture implements DependentFixtureInterface
 {
     public function getDependencies()
     {
         return [
-            DemographicTypeFixtures::class,
+            DemographicFixtures::class,
         ];
     }
 
     public function load(ObjectManager $manager)
     {
-        $membership = $this->getReference('DemographicType::membership');
+        $membership = $this->getReference('Demographic::membership');
         foreach (['Free Membership', 'Member', 'Premium Member'] as $title) {
-            $demographic = new Demographic();
+            $demographic = new Group();
             $demographic->setType($membership);
             $demographic->setStatus('publish');
             $demographic->setTitle($title);
@@ -31,9 +31,9 @@ class DemographicFixture extends Fixture implements DependentFixtureInterface
             $manager->persist($demographic);
         }
 
-        $company = $this->getReference('DemographicType::company');
+        $company = $this->getReference('Demographic::company');
         foreach (['Google', 'Microsoft', 'Apple', 'McDonalds'] as $title) {
-            $demographic = new Demographic();
+            $demographic = new Group();
             $demographic->setType($company);
             $demographic->setStatus('publish');
             $demographic->setTitle($title);

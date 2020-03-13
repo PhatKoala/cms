@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PhatKoala\UserBundle\Controller\Demographic;
 
 use PhatKoala\CoreBundle\Annotation\Form;
-use PhatKoala\UserBundle\Entity\DemographicType;
+use PhatKoala\UserBundle\Entity\Demographic;
 use PhatKoala\UserBundle\Form\Demographic\ListType;
 use PhatKoala\UserBundle\Query\DemographicQuery;
-use PhatKoala\UserBundle\Repository\DemographicRepository;
+use PhatKoala\UserBundle\Repository\GroupRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,19 +21,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListAction extends AbstractController
 {
-    private DemographicRepository $repository;
+    private GroupRepository $repository;
 
-    public function __construct(DemographicRepository $repository)
+    public function __construct(GroupRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * @param DemographicType $type
+     * @param Demographic $type
      * @param FormInterface<ListType> $form
      * @return Response
      */
-    public function __invoke(DemographicType $type, FormInterface $form): Response
+    public function __invoke(Demographic $type, FormInterface $form): Response
     {
         $query = new DemographicQuery([
             'type' => (string) $type,

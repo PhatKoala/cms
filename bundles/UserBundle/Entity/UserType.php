@@ -39,7 +39,7 @@ class UserType
     private bool $ui = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="DemographicType")
+     * @ORM\ManyToMany(targetEntity="Demographic")
      * @ORM\JoinTable(name="user_type_demographic_type",
      *     joinColumns={@ORM\JoinColumn(name="user_type", referencedColumnName="type")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="demographic_type", referencedColumnName="type")}

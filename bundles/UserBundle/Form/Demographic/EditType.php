@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhatKoala\UserBundle\Form\Demographic;
 
-use PhatKoala\UserBundle\Entity\Demographic;
+use PhatKoala\UserBundle\Entity\Group;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,7 +17,7 @@ class EditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Demographic::class,
+            'data_class' => Group::class,
             'csrf_protection' => true,
             'allow_extra_fields' => true,
         ]);

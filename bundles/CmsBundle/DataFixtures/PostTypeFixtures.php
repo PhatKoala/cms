@@ -20,22 +20,16 @@ class PostTypeFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $blog = new PostType();
-        $blog->setType('blog');
-        $blog->setName('Post');
-        $blog->setPlural('Posts');
-        $blog->setIcon('fa fa-newspaper');
-        $blog->setHierarchical(false);
-        $blog->setUi(true);
-        $blog->getTaxonomies()->add($this->getReference('Taxonomy::category'));
-        $blog->getTaxonomies()->add($this->getReference('Taxonomy::tag'));
-        $manager->persist($blog);
-        $this->setReference('PostType::blog', $blog);
+        $post = new PostType('post', 'Post', 'Posts');
+        $post->setIcon('fa fa-newspaper');
+        $post->setHierarchical(false);
+        $post->setUi(true);
+        $post->getTaxonomies()->add($this->getReference('Taxonomy::category'));
+        $post->getTaxonomies()->add($this->getReference('Taxonomy::tag'));
+        $manager->persist($post);
+        $this->setReference('PostType::blog', $post);
 
-        $page = new PostType();
-        $page->setType('page');
-        $page->setName('Page');
-        $page->setPlural('Pages');
+        $page = new PostType('page', 'Page', 'Pages');
         $page->setIcon('fa fa-file');
         $page->setHierarchical(false);
         $page->setUi(true);
