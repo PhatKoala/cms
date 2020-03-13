@@ -31,22 +31,22 @@ class Term
      * @ORM\ManyToOne(targetEntity="Taxonomy")
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?Taxonomy $taxonomy;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private ?string $status = null;
+    private Taxonomy $taxonomy;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $title = null;
+    private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $content = null;
+    private string $description = '';
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private string $status = 'publish';
 
     /**
      * @Gedmo\TreeRoot
@@ -70,14 +70,15 @@ class Term
      */
     private Collection $children;
 
-    public function __construct(Taxonomy $taxonomy)
+    public function __construct(Taxonomy $taxonomy, string $name)
     {
-        $this->taxonomy = $taxonomy;
+        $this->setTaxonomy($taxonomy);
+        $this->setName($name);
     }
 
     public function __toString()
     {
-        return $this->title;
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -85,102 +86,72 @@ class Term
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getTaxonomy(): Taxonomy
     {
-        return $this->type;
+        return $this->taxonomy;
     }
 
-    /**
-     * @param Taxonomy $type
-     * @return $this
-     */
-    public function setType(Taxonomy $type): self
+    public function setTaxonomy(Taxonomy $taxonomy): void
     {
-        $this->type = $type;
-
-        return $this;
+        $this->taxonomy = $taxonomy;
     }
 
-    public function getStatus(): ?string
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): self
+    public function setStatus(string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoot()
+    public function getRoot(): ?Term
     {
         return $this->root;
     }
 
-    /**
-     * @param mixed $root
-     */
-    public function setRoot($root): void
+    public function setRoot(?Term $root): void
     {
         $this->root = $root;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getParent()
+    public function getParent(): ?Term
     {
         return $this->parent;
     }
 
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent): void
+    public function setParent(?Term $parent): void
     {
         $this->parent = $parent;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChildren()
+    public function getChildren(): Collection
     {
         return $this->children;
     }
 
-    /**
-     * @param mixed $children
-     */
-    public function setChildren($children): void
+    public function setChildren(Collection $children): void
     {
         $this->children = $children;
     }

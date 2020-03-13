@@ -35,11 +35,6 @@ class Post
     private PostType $type;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private string $status = 'draft';
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private string $title = '';
@@ -53,6 +48,11 @@ class Post
      * @ORM\Column(type="text", nullable=true)
      */
     private string $excerpt = '';
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private string $status = 'publish';
 
     /**
      * @var Collection<Term>
@@ -115,16 +115,6 @@ class Post
         $this->type = $type;
     }
 
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): void
-    {
-        $this->status = $status;
-    }
-
     public function getTitle(): string
     {
         return $this->title;
@@ -153,6 +143,16 @@ class Post
     public function setExcerpt(string $excerpt): void
     {
         $this->excerpt = $excerpt;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 
     public function getTerms(): Collection

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhatKoala\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,22 +17,22 @@ class UserType
      * @ORM\Id()
      * @ORM\Column(type="string", length=100)
      */
-    private ?string $type = null;
+    private string $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $name = null;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $plural = null;
+    private string $plural;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private ?string $icon = 'fa fa-user';
+    private string $icon = 'fa fa-user';
 
     /**
      * @ORM\Column(type="boolean")
@@ -45,14 +46,31 @@ class UserType
      *     inverseJoinColumns={@ORM\JoinColumn(name="demographic_type", referencedColumnName="type")}
      * )
      */
-    private ArrayCollection $demographics;
+    private Collection $demographics;
+
+    public function __construct(string $type, string $name = '', string $plural = '')
+    {
+        $this->setType($type);
+
+        if (empty($name)) {
+            $name = ucfirst($type);
+        }
+        $this->setName($name);
+
+        if (empty($plural)) {
+            $plural = sprintf('%ss', $name);
+        }
+        $this->setPlural($plural);
+
+        $this->demographics = new ArrayCollection();
+    }
 
     public function __toString()
     {
         return $this->type;
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
     }
@@ -62,66 +80,52 @@ class UserType
         $this->type = $type;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getPlural(): ?string
+    public function getPlural(): string
     {
         return $this->plural;
     }
 
-    public function setPlural(?string $plural): self
+    public function setPlural(string $plural): void
     {
         $this->plural = $plural;
-
-        return $this;
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return $this->icon;
     }
 
-    public function setIcon(?string $icon): self
+    public function setIcon(string $icon): void
     {
         $this->icon = $icon;
-
-        return $this;
     }
 
-    public function hasUi(): ?bool
+    public function hasUi(): bool
     {
         return $this->ui;
     }
 
-    public function setUi(bool $ui): self
+    public function setUi(bool $ui): void
     {
         $this->ui = $ui;
-
-        return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getDemographics(): ArrayCollection
+    public function getDemographics()
     {
         return $this->demographics;
     }
 
-    /**
-     * @param ArrayCollection $demographics
-     */
-    public function setDemographics(ArrayCollection $demographics): void
+    public function setDemographics($demographics): void
     {
         $this->demographics = $demographics;
     }

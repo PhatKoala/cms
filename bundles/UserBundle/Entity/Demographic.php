@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhatKoala\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,22 +17,22 @@ class Demographic
      * @ORM\Id()
      * @ORM\Column(type="string", length=100)
      */
-    private ?string $type = null;
+    private string $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $name = null;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $plural = null;
+    private string $plural;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private ?string $icon = 'fa fa-tag';
+    private string $icon = 'fa fa-tag';
 
     /**
      * @ORM\Column(type="boolean")
@@ -43,16 +45,35 @@ class Demographic
     private bool $ui = false;
 
     /**
-     * @ORM\Column(type="array")
+     * @var Collection<Group>
+     *
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="demographic")
      */
-    private array $demographics = [ ];
+    private Collection $demographics;
+
+    public function __construct(string $type, string $name = '', string $plural = '')
+    {
+        $this->setType($type);
+
+        if (empty($name)) {
+            $name = ucfirst($type);
+        }
+        $this->setName($name);
+
+        if (empty($plural)) {
+            $plural = sprintf('%ss', $name);
+        }
+        $this->setPlural($plural);
+
+        $this->demographics = new ArrayCollection();
+    }
 
     public function __toString()
     {
         return $this->type;
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
     }
@@ -62,78 +83,62 @@ class Demographic
         $this->type = $type;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getPlural(): ?string
+    public function getPlural(): string
     {
         return $this->plural;
     }
 
-    public function setPlural(?string $plural): self
+    public function setPlural(string $plural): void
     {
         $this->plural = $plural;
-
-        return $this;
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return $this->icon;
     }
 
-    public function setIcon(?string $icon): self
+    public function setIcon(string $icon): void
     {
         $this->icon = $icon;
-
-        return $this;
     }
 
-    public function isHierarchical(): ?bool
+    public function isHierarchical(): bool
     {
         return $this->hierarchical;
     }
 
-    public function setHierarchical(bool $hierarchical): self
+    public function setHierarchical(bool $hierarchical): void
     {
         $this->hierarchical = $hierarchical;
-
-        return $this;
     }
 
-    public function hasUi(): ?bool
+    public function hasUi(): bool
     {
         return $this->ui;
     }
 
-    public function setUi(bool $ui): self
+    public function setUi(bool $ui): void
     {
         $this->ui = $ui;
-
-        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getDemographics(): array
+    public function getDemographics(): Collection
     {
         return $this->demographics;
     }
 
-    /**
-     * @param array $demographics
-     */
-    public function setDemographics(array $demographics): void
+    public function setDemographics(Collection $demographics): void
     {
         $this->demographics = $demographics;
     }

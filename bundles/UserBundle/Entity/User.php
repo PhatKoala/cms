@@ -23,45 +23,43 @@ class User
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\ManyToOne(targetEntity="UserType")
+     * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?UserType $type;
+    private UserType $type;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private ?string $status = null;
+    private string $status = 'active';
+
+    public function __construct(UserType $type)
+    {
+        $this->type = $type;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getType(): UserType
     {
         return $this->type;
     }
 
-    /**
-     * @param UserType $type
-     * @return $this
-     */
-    public function setType(UserType $type): self
+    public function setType(UserType $type): void
     {
         $this->type = $type;
-
-        return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): self
+    public function setStatus(string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 }

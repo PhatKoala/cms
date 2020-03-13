@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhatKoala\UserBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
@@ -30,144 +31,127 @@ class Group
      * @ORM\ManyToOne(targetEntity="Demographic")
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private ?Demographic $type;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private ?string $status = null;
+    private Demographic $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $title = null;
+    private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $content = null;
+    private string $description = '';
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private string $status = 'publish';
 
     /**
      * @Gedmo\TreeRoot
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumn(name="tree_root", referencedColumnName="id")
      */
-    private $root;
+    private ?Group $root;
 
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
-    private $parent;
+    private ?Group $parent;
 
     /**
+     * @var Collection<Group>
+     *
      * @ORM\OneToMany(targetEntity="Group", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
-    private $children;
+    private Collection $children;
+
+    public function __construct(Demographic $demographic, string $name)
+    {
+        $this->setDemographic($demographic);
+        $this->setName($name);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getType(): ?Demographic
+    public function getType(): Demographic
     {
         return $this->type;
     }
 
-    /**
-     * @param Demographic $type
-     * @return $this
-     */
-    public function setType(Demographic $type): self
+    public function setType(Demographic $type): void
     {
         $this->type = $type;
-
-        return $this;
     }
 
-    public function getStatus(): ?string
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): self
+    public function setStatus(string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoot()
+    public function getRoot(): ?Group
     {
         return $this->root;
     }
 
-    /**
-     * @param mixed $root
-     */
-    public function setRoot($root): void
+    public function setRoot(?Group $root): void
     {
         $this->root = $root;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getParent()
+    public function getParent(): ?Group
     {
         return $this->parent;
     }
 
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent): void
+    public function setParent(?Group $parent): void
     {
         $this->parent = $parent;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChildren()
+    public function getChildren(): Collection
     {
         return $this->children;
     }
 
-    /**
-     * @param mixed $children
-     */
-    public function setChildren($children): void
+    public function setChildren(Collection $children): void
     {
         $this->children = $children;
     }
