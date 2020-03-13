@@ -8,7 +8,7 @@ use PhatKoala\CoreBundle\Annotation\Form;
 use PhatKoala\UserBundle\Entity\Demographic;
 use PhatKoala\UserBundle\Form\Demographic\ListType;
 use PhatKoala\UserBundle\Query\DemographicQuery;
-use PhatKoala\UserBundle\Repository\GroupRepository;
+use PhatKoala\UserBundle\Repository\SegmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,9 +21,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListAction extends AbstractController
 {
-    private GroupRepository $repository;
+    private SegmentRepository $repository;
 
-    public function __construct(GroupRepository $repository)
+    public function __construct(SegmentRepository $repository)
     {
         $this->repository = $repository;
     }

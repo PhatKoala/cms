@@ -21,20 +21,16 @@ class TermFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $category = $this->getReference('Taxonomy::category');
-        foreach (['Tutorial', 'Review', 'News'] as $title) {
-            $taxonomy = new Term($category);
-            $taxonomy->setStatus('publish');
-            $taxonomy->setTitle($title);
-            $taxonomy->setContent(sprintf('My my description for my %s Category', $title));
+        foreach (['Tutorial', 'Review', 'News'] as $name) {
+            $taxonomy = new Term($category, $name);
+            $taxonomy->setDescription(sprintf('My my description for my %s Category', $name));
             $manager->persist($taxonomy);
         }
 
         $tag = $this->getReference('Taxonomy::tag');
-        foreach (['HTML', 'CSS', 'PHP'] as $title) {
-            $taxonomy = new Term($tag);
-            $taxonomy->setStatus('publish');
-            $taxonomy->setTitle($title);
-            $taxonomy->setContent(sprintf('My my description for my %s Tag', $title));
+        foreach (['HTML', 'CSS', 'PHP'] as $name) {
+            $taxonomy = new Term($tag, $name);
+            $taxonomy->setDescription(sprintf('My my description for my %s Tag', $name));
             $manager->persist($taxonomy);
         }
 

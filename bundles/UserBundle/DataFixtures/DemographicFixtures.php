@@ -13,21 +13,15 @@ class DemographicFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $membership = new Demographic();
-        $membership->setType('membership');
-        $membership->setName('Membership');
-        $membership->setPlural('Memberships');
+        $membership = new Demographic('membership', 'Membership', 'Memberships');
         $membership->setIcon('fa fa-id-card');
         $membership->setHierarchical(false);
         $membership->setUi(true);
-        $membership->setDemographics(['company']);
+//        $membership->setDemographics(['company']);
         $manager->persist($membership);
         $this->setReference('Demographic::membership', $membership);
 
-        $company = new Demographic();
-        $company->setType('company');
-        $company->setName('Company');
-        $company->setPlural('Companies');
+        $company = new Demographic('company', 'Company', 'Companies');
         $company->setIcon('fa fa-briefcase');
         $company->setHierarchical(false);
         $company->setUi(true);

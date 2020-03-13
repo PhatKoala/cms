@@ -21,21 +21,16 @@ class UserTypeFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $post = new UserType('admin', 'Admin', 'Admins');
-        $post->setIcon('fa fa-newspaper');
-        $post->setHierarchical(false);
-        $post->setUi(true);
-        $post->getTaxonomies()->add($this->getReference('Taxonomy::category'));
-        $post->getTaxonomies()->add($this->getReference('Taxonomy::tag'));
-        $manager->persist($post);
-        $this->setReference('PostType::blog', $post);
+        $admin = new UserType('admin', 'Admin', 'Admins');
+        $admin->setIcon('fa fa-user-tie');
+        $manager->persist($admin);
+        $this->setReference('UserType::admin', $admin);
 
-        $page = new PostType('page', 'Page', 'Pages');
-        $page->setIcon('fa fa-file');
-        $page->setHierarchical(false);
-        $page->setUi(true);
-        $manager->persist($page);
-        $this->setReference('PostType::page', $page);
+        $member = new UserType('member', 'Member', 'Members');
+        $member->setIcon('fa fa-user');
+        $member->getDemographics()->add($this->getReference('Demographic::company'));
+        $manager->persist($member);
+        $this->setReference('UserType::member', $member);
 
         $manager->flush();
     }

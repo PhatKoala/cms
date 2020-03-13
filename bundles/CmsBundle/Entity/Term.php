@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
-use PhatKoala\CoreBundle\Entity\Traits\Sluggable;
 use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
 use PhatKoala\CoreBundle\Entity\Traits\Tree;
 
@@ -18,7 +17,7 @@ use PhatKoala\CoreBundle\Entity\Traits\Tree;
  */
 class Term
 {
-    use Prioritise, Sluggable, Timestampable, Tree;
+    use Prioritise, Timestampable, Tree;
 
     /**
      * @ORM\Id()
@@ -42,6 +41,12 @@ class Term
      * @ORM\Column(type="text", nullable=true)
      */
     private string $description = '';
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private ?string $slug = null;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -114,6 +119,16 @@ class Term
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     public function getStatus(): string

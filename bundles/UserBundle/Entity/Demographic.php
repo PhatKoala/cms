@@ -45,9 +45,9 @@ class Demographic
     private bool $ui = false;
 
     /**
-     * @var Collection<Group>
+     * @var Collection<Segment>
      *
-     * @ORM\OneToMany(targetEntity="Group", mappedBy="demographic")
+     * @ORM\OneToMany(targetEntity="Segment", mappedBy="demographic")
      */
     private Collection $demographics;
 

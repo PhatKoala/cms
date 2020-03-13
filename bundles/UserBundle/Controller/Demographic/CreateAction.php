@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PhatKoala\UserBundle\Controller\Demographic;
 
 use PhatKoala\CoreBundle\Annotation\Form;
-use PhatKoala\UserBundle\Entity\Group;
+use PhatKoala\UserBundle\Entity\Segment;
 use PhatKoala\UserBundle\Entity\Demographic;
 use PhatKoala\UserBundle\Form\Demographic\CreateType;
-use PhatKoala\UserBundle\Repository\GroupRepository;
+use PhatKoala\UserBundle\Repository\SegmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateAction extends AbstractController
 {
-    private GroupRepository $repository;
+    private SegmentRepository $repository;
 
-    public function __construct(GroupRepository $repository)
+    public function __construct(SegmentRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -35,7 +35,7 @@ class CreateAction extends AbstractController
     public function __invoke(Demographic $type, FormInterface $form): Response
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Group $demographic */
+            /** @var Segment $demographic */
             $demographic = $form->getData();
             $demographic->setType($type);
 

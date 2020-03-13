@@ -4,23 +4,23 @@ namespace PhatKoala\UserBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use PhatKoala\UserBundle\Entity\Group;
+use PhatKoala\UserBundle\Entity\Segment;
 
 /**
- * @method Group|null find($id, $lockMode = null, $lockVersion = null)
- * @method Group|null findOneBy(array $criteria, array $orderBy = null)
- * @method Group[]    findAll()
- * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Segment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Segment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Segment[]    findAll()
+ * @method Segment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupRepository extends ServiceEntityRepository
+class SegmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Group::class);
+        parent::__construct($registry, Segment::class);
     }
 
     // /**
-    //  * @return Group[] Returns an array of Group objects
+    //  * @return Segment[] Returns an array of Segment objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class GroupRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Group
+    public function findOneBySomeField($value): ?Segment
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.exampleField = :val')

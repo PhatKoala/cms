@@ -8,17 +8,16 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
-use PhatKoala\CoreBundle\Entity\Traits\Sluggable;
 use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
 use PhatKoala\CoreBundle\Entity\Traits\Tree;
 
 /**
- * @ORM\Entity(repositoryClass="GroupRepository")
+ * @ORM\Entity(repositoryClass="PhatKoala\UserBundle\Repository\SegmentRepository")
  * @Gedmo\Tree()
  */
-class Group
+class Segment
 {
-    use Prioritise, Sluggable, Timestampable, Tree;
+    use Prioritise, Timestampable, Tree;
 
     /**
      * @ORM\Id()
@@ -31,7 +30,7 @@ class Group
      * @ORM\ManyToOne(targetEntity="Demographic")
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    private Demographic $type;
+    private Demographic $demographic;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -44,28 +43,34 @@ class Group
     private string $description = '';
 
     /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private ?string $slug = null;
+
+    /**
      * @ORM\Column(type="string", length=64)
      */
     private string $status = 'publish';
 
     /**
      * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\ManyToOne(targetEntity="Segment")
      * @ORM\JoinColumn(name="tree_root", referencedColumnName="id")
      */
-    private ?Group $root;
+    private ?Segment $root;
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Segment", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
-    private ?Group $parent;
+    private ?Segment $parent;
 
     /**
-     * @var Collection<Group>
+     * @var Collection<Segment>
      *
-     * @ORM\OneToMany(targetEntity="Group", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Segment", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private Collection $children;
@@ -86,14 +91,14 @@ class Group
         return $this->id;
     }
 
-    public function getType(): Demographic
+    public function getDemographic(): Demographic
     {
-        return $this->type;
+        return $this->demographic;
     }
 
-    public function setType(Demographic $type): void
+    public function setDemographic(Demographic $demographic): void
     {
-        $this->type = $type;
+        $this->demographic = $demographic;
     }
 
     public function getName(): string
@@ -116,6 +121,16 @@ class Group
         $this->description = $description;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
     public function getStatus(): string
     {
         return $this->status;
@@ -126,22 +141,22 @@ class Group
         $this->status = $status;
     }
 
-    public function getRoot(): ?Group
+    public function getRoot(): ?Segment
     {
         return $this->root;
     }
 
-    public function setRoot(?Group $root): void
+    public function setRoot(?Segment $root): void
     {
         $this->root = $root;
     }
 
-    public function getParent(): ?Group
+    public function getParent(): ?Segment
     {
         return $this->parent;
     }
 
-    public function setParent(?Group $parent): void
+    public function setParent(?Segment $parent): void
     {
         $this->parent = $parent;
     }

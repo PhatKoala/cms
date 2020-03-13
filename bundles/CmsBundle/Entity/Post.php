@@ -9,7 +9,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use PhatKoala\CoreBundle\Entity\Traits\Prioritise;
-use PhatKoala\CoreBundle\Entity\Traits\Sluggable;
 use PhatKoala\CoreBundle\Entity\Traits\Timestampable;
 use PhatKoala\CoreBundle\Entity\Traits\Tree;
 
@@ -19,7 +18,7 @@ use PhatKoala\CoreBundle\Entity\Traits\Tree;
  */
 class Post
 {
-    use Prioritise, Sluggable, Timestampable, Tree;
+    use Prioritise, Timestampable, Tree;
 
     /**
      * @ORM\Id()
@@ -48,6 +47,12 @@ class Post
      * @ORM\Column(type="text", nullable=true)
      */
     private string $excerpt = '';
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private ?string $slug = null;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -143,6 +148,16 @@ class Post
     public function setExcerpt(string $excerpt): void
     {
         $this->excerpt = $excerpt;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     public function getStatus(): string
