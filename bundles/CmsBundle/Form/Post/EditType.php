@@ -76,7 +76,7 @@ class EditType extends AbstractType
                             ->andWhere('term.taxonomy = :taxonomy')
                             ->setParameter('taxonomy', $taxonomy);
                     },
-                    'choice_label' => 'title',
+                    'choice_label' => 'name',
                     'mapped' => false,
                 ]);
         }
