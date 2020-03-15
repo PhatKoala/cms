@@ -22,3 +22,8 @@ services:
   PhatKoala\DashboardBundle\Controller\:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
+
+  app.admin_configure_menu_listener:
+    class: PhatKoala\CoreBundle\EventListener\MainMenuListener
+    tags:
+      - { name: kernel.event_listener, event: app.menu_configure, method: onMenuConfigure }

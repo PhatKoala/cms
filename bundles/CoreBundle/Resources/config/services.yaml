@@ -22,3 +22,18 @@ services:
   PhatKoala\CoreBundle\Controller\:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
+
+  app.menu_builder:
+    class: PhatKoala\CoreBundle\Menu\MainMenuBuilder
+    arguments:
+      - "@event_dispatcher"
+      - "@knp_menu.factory"
+
+  app.main_menu:
+    class: Knp\Menu\MenuItem # the service definition requires setting the class
+    factory: ["@app.menu_builder", build]
+#    arguments: ["@request_stack"]
+    tags:
+      - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+  # ...
