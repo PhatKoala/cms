@@ -1,11 +1,21 @@
-//@import "vendor/bootstrap/bootstrap-reboot.css";
-//@import "vendor/bootstrap/bootstrap-utilities.css";
-//@import "vendor/bootstrap/bootstrap-grid.css";
-@import "vendor/bootstrap/bootstrap.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-//@import "tailwindcss/base";
-//@import "tailwindcss/components";
-//@import "tailwindcss/utilities";
-//
-//@import "vendor/tailwindcss/tailwindcss";
+@import "vendor/tailwindcss/tailwindcss";
+
+body {
+  margin-top: 32px;
+}
+
+.navbar {
+  @apply .fixed .top-0 .right-0 .left-0 .flex .flex-wrap .bg-blue-900;
+  padding: .5rem 1rem;
+  .navbar-brand {
+    @apply text-white;
+  }
+  .nav-link {
+    color: color(config('colors.white') a(50%));
+  }
+}
 

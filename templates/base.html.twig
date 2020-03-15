@@ -8,83 +8,30 @@
     {% endblock %}
 </head>
 <body>
+
 <nav class="navbar">
     <a class="navbar-brand" href="{{ path('dashboard') }}">Phat Koala</a>
 </nav>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3 bg-dank text-light">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a href="{{ path('dashboard') }}">
-                        Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('post_list', {type: 'page'}) }}">
-                        Pages
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('post_list', {type: 'blog'}) }}">
-                        Blog
-                    </a>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="{{ path('taxonomy_list', {type: 'category'}) }}">
-                                Categories
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('taxonomy_list', {type: 'tag'}) }}">
-                                Tags
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('post_list', {type: 'media'}) }}">
-                        Media
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('post_list', {type: 'comment'}) }}">
-                        Comments
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('user_list', {type: 'member'}) }}">
-                        Members
-                    </a>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="{{ path('demographic_list', {type: 'membership'}) }}">
-                                Memberships
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('demographic_list', {type: 'company'}) }}">
-                                Companies
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+<div id="container">
+    <div id="nav">
+        
+    </div>
+    <div id="content">
+        <h1>Dashboard</h1>
+        <div>Breadcrumbs</div>
 
-            </ul>
-        </div>
-        <div class="col-9">
-            {% for label, messages in app.flashes() %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+        {% for label, messages in app.flashes() %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
             {% endfor %}
+        {% endfor %}
 
-            {% block body %}{% endblock %}
-        </div>
+        {% block body %}{% endblock %}
     </div>
 </div>
+
 </body>
 </html>
