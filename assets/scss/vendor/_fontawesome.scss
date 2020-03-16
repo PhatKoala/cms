@@ -1,0 +1,10 @@
+$fa-font-path: "../webfonts";
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+.fa, .far, .fas, .fab {
+  @extend .fa-fw;
+}

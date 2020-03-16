@@ -23,12 +23,12 @@ class MainMenuListener
         foreach ($this->postType->findAll() as $postType) {
             $root = $menu
                 ->addChild($postType->getPlural(), ['route' => 'dashboard'])
-                ->setExtra('icon', 'fa fa-home');
+                ->setExtra('icon', sprintf('fa fa-%s', $postType->getIcon()));
 
             foreach ($postType->getTaxonomies() as $taxonomy) {
                 $root
                     ->addChild($taxonomy->getPlural(), ['route' => 'dashboard'])
-                    ->setExtra('icon', 'fa fa-home');
+                    ->setExtra('icon', sprintf('fa fa-%s', $taxonomy->getIcon()));
             }
         }
     }
