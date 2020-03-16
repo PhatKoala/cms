@@ -23,7 +23,7 @@ services:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
 
-  app.admin_configure_menu_listener:
-    class: PhatKoala\CoreBundle\EventListener\MainMenuListener
+  dashboard.main_menu_listener:
+    class: PhatKoala\DashboardBundle\EventListener\MainMenuListener
     tags:
-      - { name: kernel.event_listener, event: app.menu_configure, method: onMenuConfigure }
+      - { name: kernel.event_listener, event: core.main_menu, method: onMenuConfigure, priority: 1000 }

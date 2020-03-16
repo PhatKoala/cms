@@ -22,3 +22,8 @@ services:
   PhatKoala\CmsBundle\Controller\:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
+
+  cms.main_menu_listener:
+    class: PhatKoala\CmsBundle\EventListener\MainMenuListener
+    tags:
+      - { name: kernel.event_listener, event: core.main_menu, method: onMenuConfigure, priority: 900 }

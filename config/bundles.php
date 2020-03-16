@@ -17,8 +17,8 @@ return [
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
 
-    PhatKoala\CmsBundle\PhatKoalaCmsBundle::class => ['all' => true],
     PhatKoala\CoreBundle\PhatKoalaCoreBundle::class => ['all' => true],
-    PhatKoala\DashboardBundle\PhatKoalaDashboardBundle::class => ['all' => true],
     PhatKoala\UserBundle\PhatKoalaUserBundle::class => ['all' => true],
+    PhatKoala\CmsBundle\PhatKoalaCmsBundle::class => ['all' => true],
+    PhatKoala\DashboardBundle\PhatKoalaDashboardBundle::class => ['all' => true],
 ];

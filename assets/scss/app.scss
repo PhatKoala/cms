@@ -5,7 +5,7 @@
 @import "vendor/tailwindcss/tailwindcss";
 
 body {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 .navbar {
@@ -19,3 +19,9 @@ body {
   }
 }
 
+#container {
+  @apply .flex flex-wrap;
+  #nav {
+    width: 300px;
+  }
+}

@@ -12,7 +12,8 @@ class MainMenuListener
     {
         $menu = $event->getMenu();
 
-        $menu->addChild('Matches', ['route' => 'dashboard']);
-        $menu->addChild('Participants', ['route' => 'dashboard']);
+        $menu->addChild('Dashboard', ['route' => 'dashboard'])
+            ->setExtra('icon', 'home');
+
     }
 }
