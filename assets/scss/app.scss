@@ -7,6 +7,7 @@
 
 body {
   margin-top: 40px;
+  font-size: 1rem;
 }
 
 .navbar {
@@ -20,9 +21,34 @@ body {
   }
 }
 
-#container {
-  @apply .flex flex-wrap;
-  #nav {
-    width: 300px;
+.wrapper {
+  &:before {
+    @apply .bg-blue-900 block w-full h-32 absolute;
+    content: '';
+    z-index: -1;
   }
+  @apply .flex;
+  .nav {
+    @apply .flex-none;
+    background-color: #fff;
+    width: 220px;
+    color: #6b737c;
+    .nav-item {
+      .nav-link {
+        padding: 12px 18px;
+      }
+      &.current {
+        .nav-link {
+          @apply .bg-blue-900;
+        }
+      }
+    }
+  }
+  .main {
+    @apply .flex-grow;
+    .content {
+      background-color: blue;
+    }
+  }
+
 }

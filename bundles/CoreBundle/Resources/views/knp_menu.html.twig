@@ -1,5 +1,16 @@
 {% extends 'knp_menu.html.twig' %}
 
+{% block item %}
+    {% set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {% do item.setAttribute('class', classes|merge(['nav-item'])|join(' ')) %}
+
+    {% set linkClasses = item.linkAttribute('class') is not empty ? [item.linkAttribute('class')] : [] %}
+    {% do item.setLinkAttribute('class', linkClasses|merge(['nav-link'])|join(' ')) %}
+
+    {{ parent() }}
+{% endblock %}
+
+
 {% block linkElement %}
     {% import _self as knp_menu %}
     <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>

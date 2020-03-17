@@ -13,13 +13,23 @@
     <a class="navbar-brand" href="{{ path('dashboard') }}">Phat Koala</a>
 </nav>
 
-<div id="container">
-    <div id="nav">
+<div class="wrapper">
+    <div class="nav">
         {{ knp_menu_render('main') }}
     </div>
-    <div id="content">
+    <div class="main">
         <h1>Dashboard</h1>
-        <div>Breadcrumbs</div>
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
+                    {% if not loop.last %}
+                        <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>
+                    {% else %}
+                        <li class="active">{{ breadcrumb_item.label }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
 
         {% for label, messages in app.flashes() %}
             {% for message in messages %}
@@ -29,7 +39,9 @@
             {% endfor %}
         {% endfor %}
 
-        {% block body %}{% endblock %}
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
     </div>
 </div>
 
