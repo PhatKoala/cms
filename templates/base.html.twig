@@ -13,11 +13,11 @@
     <a class="navbar-brand" href="{{ path('dashboard') }}">Phat Koala</a>
 </nav>
 
-<div class="wrapper">
-    <div class="nav">
+<div class="container-page">
+    <div class="container-navigation">
         {{ knp_menu_render('main') }}
     </div>
-    <div class="main">
+    <div class="container-main">
         <h1>Dashboard</h1>
         <div class="breadcrumbs">
             <ol class="breadcrumb">
@@ -39,7 +39,7 @@
             {% endfor %}
         {% endfor %}
 
-        <div class="content">
+        <div class="container-content">
             {% block body %}{% endblock %}
         </div>
     </div>
