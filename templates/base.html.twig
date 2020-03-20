@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
+        {{ encore_entry_link_tags('bootstrap') }}
+        {{ encore_entry_link_tags('tailwind') }}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
@@ -18,17 +20,19 @@
         {{ knp_menu_render('main') }}
     </div>
     <div class="container-main">
-        <h1>Dashboard</h1>
-        <div class="breadcrumbs">
-            <ol class="breadcrumb">
-                {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
-                    {% if not loop.last %}
-                        <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>
-                    {% else %}
-                        <li class="active">{{ breadcrumb_item.label }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ol>
+        <div class="container-header">
+            <h1 class="text-4xl">{{ block('title') }}</h1>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
+                        {% if not loop.last %}
+                            <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>
+                        {% else %}
+                            <li class="active">{{ breadcrumb_item.label }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
         </div>
 
         {% for label, messages in app.flashes() %}
@@ -40,6 +44,21 @@
         {% endfor %}
 
         <div class="container-content">
+            {% if block('actions') is defined or block('filtes') is defined %}
+                <div class="container-toolbar">
+                    {% if block('actions') is defined %}
+                        <div class="container-actions">
+                            {{ block('actions') }}
+                        </div>
+                    {% endif %}
+                    {% if block('filters') is defined %}
+                        <div class="container-filters">
+                            {{ block('filters') }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
             {% block body %}{% endblock %}
         </div>
     </div>

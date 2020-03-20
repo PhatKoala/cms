@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+
+body {
+  @apply bg-gray-200;
+  margin-top: 56px;
+}
+
+.container-page {
+  @apply flex;
+  &:before {
+    @apply bg-blue-800 block w-full absolute;
+    height: 220px;
+    content: '';
+    z-index: -1;
+  }
+}
+
+.navbar {
+  @apply fixed top-0 right-0 left-0 bg-blue-800;
+  z-index: 1030;
+  .navbar-brand {
+    @apply text-white;
+  }
+}
+
+.container-navigation {
+  @apply flex-none bg-white mt-4 py-4;
+  width: 220px;
+}
+
+.nav {
+  @apply flex-col;
+}
+
+.container-toolbar {
+  @apply sticky;
+  top: 52px;
+  z-index: 1020;
+
+  .container-actions {
+    @apply flex;
+  }
+
+  .container-filters {
+    @apply flex bg-white p-2 mb-2 rounded border border-solid border-gray-400;
+  }
+
+
+  //.form-group, .btn-group, .form-inline {
+  //  @apply mb-0 mr-1;
+  //}
+  //.container-pagination {
+  //  @apply inline-flex;
+  //  button, input {
+  //    @apply flex-1;
+  //  }
+  //}
+}
+
+.container-main {
+  @apply flex-grow mt-12 px-4;
+}
+
+.container-header {
+  @apply bg-blue-800 text-white;
+  a {
+    @apply text-white;
+  }
+}
+
+.container-content {
+
+}
+
+.breadcrumbs {
+  @apply font-bold my-8;
+  .breadcrumb {
+    @apply list-none p-0 inline-flex;
+    li {
+      @apply flex items-center;
+      &+li{
+        @apply pl-2;
+        &:before {
+          @apply inline-block pr-2 text-gray-300;
+          content: "/";
+        }
+      }
+    }
+  }
+}
+
+@tailwind utilities;
+
+//body {
+//  margin-top: 37px;
+//  font-size: .9rem;
+//}
+//
+//.navbar {
+//  @apply fixed top-0 right-0 left-0 flex flex-wrap bg-blue-900;
+//  padding: .5rem 1rem;
+//  .navbar-brand {
+//    @apply text-white;
+//  }
+//  .nav-link {
+//    @apply text-gray-100;
+//  }
+//}
+//
+//.wrapper {
+//  &:before {
+//    @apply bg-blue-900 block w-full h-32 absolute;
+//    content: '';
+//    z-index: -1;
+//  }
+//  @apply .flex;
+//  .navigation {
+//    @apply .flex-none p-1 bg-white text-gray-700;
+//    width: 220px;
+//    .nav {
+//      @apply flex flex-wrap flex-col;
+//      .nav-item {
+//        .nav-link {
+//          @apply block p-2;
+//        }
+//        &.current {
+//          > .nav-link {
+//            @apply bg-blue-900 text-gray-100 rounded-sm;
+//          }
+//        }
+//      }
+//    }
+//
+//  }
+//  .main {
+//    @apply .flex-grow;
+//    .content {
+//      background-color: blue;
+//    }
+//  }
+//
+//}

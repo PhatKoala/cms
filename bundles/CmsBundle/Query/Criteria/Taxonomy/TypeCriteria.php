@@ -27,19 +27,19 @@ class TypeCriteria implements CriteriaArrayInterface, CriteriaBuilderInterface
     public function build(QueryBuilder $builder)
     {
         if (!is_null($this->equal)) {
-            $builder->andWhere($builder->expr()->eq('taxonomy.type', $builder->expr()->literal($this->equal)));
+            $builder->andWhere($builder->expr()->eq('term.taxonomy', $builder->expr()->literal($this->equal)));
         }
 
         if (!is_null($this->notEqual)) {
-            $builder->andWhere($builder->expr()->neq('taxonomy.type', $builder->expr()->literal($this->notEqual)));
+            $builder->andWhere($builder->expr()->neq('term.taxonomy', $builder->expr()->literal($this->notEqual)));
         }
 
         if (!empty($this->in)) {
-            $builder->andWhere($builder->expr()->in('taxonomy.type', $this->in));
+            $builder->andWhere($builder->expr()->in('term.taxonomy', $this->in));
         }
 
         if (!empty($this->notIn)) {
-            $builder->andWhere($builder->expr()->notIn('taxonomy.type', $this->notIn));
+            $builder->andWhere($builder->expr()->notIn('term.taxonomy', $this->notIn));
         }
     }
 }
