@@ -12,7 +12,9 @@ class MainMenuBuilder
 {
     public function build(EventDispatcherInterface $dispatcher, FactoryInterface $factory)
     {
-        $menu = $factory->createItem('Home', ['route' => 'dashboard']);
+        $menu = $factory
+            ->createItem('Home', ['route' => 'dashboard'])
+            ->setExtra('icon', 'home');
 
         $dispatcher->dispatch(
             new MainMenuEvent($factory, $menu), MainMenuEvent::CONFIGURE,

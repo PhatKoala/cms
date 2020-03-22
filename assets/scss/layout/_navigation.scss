@@ -1,0 +1,8 @@
+.container-navigation {
+  @apply flex-none bg-white py-4 h-full;
+  @apply fixed;
+  width: 220px;
+  .nav {
+    @apply flex-col;
+  }
+}

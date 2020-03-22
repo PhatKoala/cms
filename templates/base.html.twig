@@ -13,6 +13,18 @@
 
 <nav class="navbar">
     <a class="navbar-brand" href="{{ path('dashboard') }}">Phat Koala</a>
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="#">
+                <i class="fa fa-bell"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#">
+                <i class="fa fa-image"></i> Stewart Walter <i class="fa fa-caret-down"></i>
+            </a>
+        </li>
+    </ul>
 </nav>
 
 <div class="container-page">
@@ -20,45 +32,59 @@
         {{ knp_menu_render('main') }}
     </div>
     <div class="container-main">
-        <div class="container-header">
+        <div class="container-title">
             <h1 class="text-4xl">{{ block('title') }}</h1>
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
-                        {% if not loop.last %}
-                            <li><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>
-                        {% else %}
-                            <li class="active">{{ breadcrumb_item.label }}</li>
-                        {% endif %}
-                    {% endfor %}
-                </ol>
-            </div>
         </div>
 
-        {% for label, messages in app.flashes() %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+        <div class="container-breadcrumbs">
+            <ol class="breadcrumb">
+                {% for breadcrumb in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item('main')) %}
+                    {% if not loop.last %}
+                        <li class="breadcrumb-item">
+                            {% if breadcrumb.item.extra('icon') is not none %}
+                                <i class="fa fa-{{ breadcrumb.item.extra('icon') }}"></i>
+                            {% endif %}
+                            <a href="{{ breadcrumb.uri }}" class="breadcrumb-link">
+                                {{ breadcrumb.label }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="breadcrumb-item active">
+                            {% if breadcrumb.item.extra('icon') is not none %}
+                                <i class="fa fa-{{ breadcrumb.item.extra('icon') }}"></i>
+                            {% endif %}
+                            {{ breadcrumb.label }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
+
+        {% if block('actions') is defined %}
+            <div class="container-actions">
+                {{ block('actions') }}
+            </div>
+        {% endif %}
+
+        {% if app.flashes() is not empty %}
+            <div class="container-alerts">
+                {% for label, messages in app.flashes() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if block('toolbar') is defined %}
+            <div class="container-toolbar">
+                {{ block('toolbar') }}
+            </div>
+        {% endif %}
 
         <div class="container-content">
-            {% if block('actions') is defined or block('filtes') is defined %}
-                <div class="container-toolbar">
-                    {% if block('actions') is defined %}
-                        <div class="container-actions">
-                            {{ block('actions') }}
-                        </div>
-                    {% endif %}
-                    {% if block('filters') is defined %}
-                        <div class="container-filters">
-                            {{ block('filters') }}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-
             {% block body %}{% endblock %}
         </div>
     </div>

@@ -1,0 +1,22 @@
+.container-breadcrumbs {
+  @apply font-bold w-1/2 flex items-end mb-2;
+  .breadcrumb {
+    @apply list-none p-0 inline-flex;
+    .breadcrumb-item {
+      @apply flex items-center text-gray-300;
+      .fa {
+        @apply mr-1;
+      }
+      &+.breadcrumb-item {
+        @apply pl-2;
+        &:before {
+          @apply inline-block pr-2 text-gray-200;
+          content: "/";
+        }
+      }
+      .breadcrumb-link {
+        @apply text-white;
+      }
+    }
+  }
+}

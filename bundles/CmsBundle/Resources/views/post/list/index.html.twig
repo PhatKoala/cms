@@ -2,25 +2,109 @@
 
 {% block title %}List {{ type.plural }}{% endblock %}
 
+{% block actions %}
+    <div class="form-group">
+        <a href="{{ path('post_create', {type:type}) }}" class="btn btn-light">
+            New {{ type.name }}
+        </a>
+    </div>
+
+    <div class="form-group">
+        <a href="{{ path('post_create', {type:type}) }}" class="btn btn-light">
+            Import {{ type.plural }}
+        </a>
+    </div>
+
+    <div class="form-group">
+        <a href="{{ path('post_create', {type:type}) }}" class="btn btn-light">
+            Export {{ type.plural }}
+        </a>
+    </div>
+{% endblock %}
+
+{% block toolbar %}
+    <div class="container-filters">
+        <div class="form-group">
+            <select class="form-control">
+                <option>Filter option</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control">
+                <option>Filter option</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-outline-primary">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-pagination">
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-double-left"></i></button></div>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-left"></i></button></div>
+        <div class="form-group"><input type="number" class="form-control w-16" placeholder="Page" value="1"> <label>of 6</label></div>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-right"></i></button></div>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-double-right"></i></button></div>
+        <div class="form-group"><input type="number" class="form-control w-16" placeholder="Page" value="10"> <label>per page</label></div>
+    </div>
+{% endblock %}
+
 {% block body %}
-<h1>List {{ type.plural }}</h1>
-<a href="{{ path('post_create', {type:type}) }}" class="btn btn-primary">New</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>View</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for post in posts %}
+
+    <div class="card">
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{ post.title }}</td>
-                <td><a href="{{ path('post_view', {'type': post.type, 'id': post.id}) }}" class="btn btn-primary">View</a></td>
-                <td><a href="{{ path('post_edit', {'type': post.type, 'id': post.id}) }}" class="btn btn-secondary">Edit</a></td>
+                <th>Image</th>
+                <th>
+                    <i class="fa fa-sort"></i>
+                    Title
+                </th>
+                <th>
+                    <i class="fa fa-sort"></i>
+                    Slug
+                </th>
+                <th>
+                    <i class="fa fa-sort"></i>
+                    Author
+                </th>
+                <th>
+                    <i class="fa fa-sort"></i>
+                    Date
+                </th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>
+                        <i class="fa fa-image"></i>
+                    </td>
+                    <td>
+                        <a href="{{ path('post_edit', {'type': post.type, 'id': post.id}) }}">
+                            {% if post.lvl > 0 %}
+                                {% for i in range(1, post.lvl) %}
+                                    &mdash;
+                                {% endfor %}
+                            {% endif %}
+                            {{ post.title }}
+                        </a>
+                    </td>
+                    <td>{{ post.slug }}</td>
+                    <td>-</td>
+                    <td>{{ post.createdAt|date('d-m-Y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}

@@ -1,0 +1,6 @@
+.container-actions {
+  @apply flex justify-end w-1/2 items-end;
+  .form-group {
+    @apply ml-2 mb-2;
+  }
+}

@@ -1,0 +1,28 @@
+.container-toolbar {
+  @apply w-full flex justify-between;
+  @apply sticky bg-white p-2 mb-2 rounded border border-solid border-gray-400;
+  top: 52px;
+  z-index: 1020;
+
+  input, select {
+    @apply border-blue-800;
+  }
+
+  .container-filters {
+    @apply flex;
+    .form-group {
+      @apply inline-flex mr-2 mb-0;
+    }
+  }
+
+  .container-pagination {
+    @apply flex;
+    .form-group {
+      @apply inline-flex ml-2 mb-0;
+      label {
+        @apply flex items-center my-1 ml-1;
+      }
+    }
+  }
+
+}

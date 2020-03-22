@@ -1,0 +1,13 @@
+.navbar {
+  @apply fixed top-0 right-0 left-0 bg-blue-800;
+  z-index: 1030;
+  @apply text-white;
+  .nav {
+    .nav-item {
+      @apply mx-3;
+      .nav-link {
+        @apply px-3;
+      }
+    }
+  }
+}

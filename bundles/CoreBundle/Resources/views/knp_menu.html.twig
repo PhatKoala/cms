@@ -22,7 +22,7 @@
 {% block linkElement %}
     {% import _self as knp_menu %}
     <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>
-        {% if item.extra('icon') is not none %}
+        {% if item.level is same as(1) and item.extra('icon') is not none %}
             <i class="fa fa-{{ item.extra('icon') }}"></i>
         {% endif %}
         {{ block('label') }}

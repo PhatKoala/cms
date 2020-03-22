@@ -25,6 +25,14 @@ class MainMenuListener
                 ->addChild($postType->getPlural(), ['route' => 'post_list', 'routeParameters' => ['type' => $postType]])
                 ->setExtra('icon', sprintf('fa fa-%s', $postType->getIcon()));
 
+            $root
+                ->addChild(sprintf('All %s', $postType->getPlural()), ['route' => 'post_list', 'routeParameters' => ['type' => $postType]])
+                ->setExtra('icon', sprintf('fa fa-%s', $postType->getIcon()));
+
+            $root
+                ->addChild(sprintf('New %s', $postType->getName()), ['route' => 'post_create', 'routeParameters' => ['type' => $postType]])
+                ->setExtra('icon', sprintf('fa fa-%s', $postType->getIcon()));
+
             foreach ($postType->getTaxonomies() as $taxonomy) {
                 $root
                     ->addChild($taxonomy->getPlural(), ['route' => 'taxonomy_list', 'routeParameters' => ['type' => $taxonomy]])

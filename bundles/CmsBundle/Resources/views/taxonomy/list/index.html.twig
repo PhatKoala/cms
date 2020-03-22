@@ -4,30 +4,56 @@
 
 {% block actions %}
     <div class="form-group">
-        <a href="{{ path('taxonomy_create', {type:type}) }}" class="btn btn-primary">
+        <a href="{{ path('taxonomy_create', {type:type}) }}" class="btn btn-light">
             New {{ type.name }}
+        </a>
+    </div>
+
+    <div class="form-group">
+        <a href="{{ path('taxonomy_create', {type:type}) }}" class="btn btn-light">
+            Import {{ type.plural }}
+        </a>
+    </div>
+
+    <div class="form-group">
+        <a href="{{ path('taxonomy_create', {type:type}) }}" class="btn btn-light">
+            Export {{ type.plural }}
         </a>
     </div>
 {% endblock %}
 
-{% block filters %}
-    <div class="form-group">
-        <div class="input-group">
+{% block toolbar %}
+    <div class="container-filters">
+        <div class="form-group">
+            <select class="form-control">
+                <option>Filter option</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control">
+                <option>Filter option</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-outline-primary">
+                <i class="fa fa-search"></i>
+            </button>
         </div>
     </div>
 
     <div class="container-pagination">
-        <button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-double-left"></i></button>
-        <button type="button" class="btn btn-primary"><i class="fa fa-angle-left"></i></button>
-        <input type="number" class="form-control w-16" placeholder="Page" value="1"> <label>of 6</label>
-        <button type="button" class="btn btn-primary"><i class="fa fa-angle-right"></i></button>
-        <button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-double-right"></i></button>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-double-left"></i></button></div>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-left"></i></button></div>
+        <div class="form-group"><input type="number" class="form-control w-16" placeholder="Page" value="1"> <label>of 6</label></div>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-right"></i></button></div>
+        <div class="form-group"><button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-double-right"></i></button></div>
+        <div class="form-group"><input type="number" class="form-control w-16" placeholder="Page" value="10"> <label>per page</label></div>
     </div>
 {% endblock %}
 
@@ -37,17 +63,44 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>View</th>
-            <th>Edit</th>
+            <th>Image</th>
+            <th>
+                <i class="fa fa-sort"></i>
+                Title
+            </th>
+            <th>
+                <i class="fa fa-sort"></i>
+                Description
+            </th>
+            <th>
+                <i class="fa fa-sort"></i>
+                Slug
+            </th>
+            <th>
+                <i class="fa fa-sort"></i>
+                Count
+            </th>
         </tr>
         </thead>
         <tbody>
         {% for term in taxonomys %}
             <tr>
-                <td>{{ term.name }}</td>
-                <td><a href="{{ path('taxonomy_view', {'type': term.taxonomy, 'id': term.id}) }}" class="btn btn-primary">View</a></td>
-                <td><a href="{{ path('taxonomy_edit', {'type': term.taxonomy, 'id': term.id}) }}" class="btn btn-secondary">Edit</a></td>
+                <td>
+                    <i class="fa fa-image"></i>
+                </td>
+                <td>
+                    <a href="{{ path('taxonomy_view', {'type': term.taxonomy, 'id': term.id}) }}">
+                        {% if term.lvl > 0 %}
+                            {% for i in range(1, term.lvl) %}
+                                &mdash;
+                            {% endfor %}
+                        {% endif %}
+                        {{ term.name }}
+                    </a>
+                </td>
+                <td>{{ term.description }}</td>
+                <td>{{ term.slug }}</td>
+                <td>-</td>
             </tr>
         {% endfor %}
         </tbody>

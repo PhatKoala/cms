@@ -21,10 +21,30 @@ class TermFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $category = $this->getReference('Taxonomy::category');
-        foreach (['Tutorial', 'Review', 'News', 'Gaming', 'DIY', 'Cooking', 'Holiday', 'Computer', 'Shopping', 'Hardware', 'Software', 'Sports', 'Exercise', 'Painting', 'Drinking'] as $name) {
-            $taxonomy = new Term($category, $name);
-            $taxonomy->setDescription(sprintf('My my description for my %s Category', $name));
-            $manager->persist($taxonomy);
+
+        $terms = [
+            'Gaming' => [
+                'Action', 'Adventure', 'Role-plyaing', 'Simulator', 'Strategy', 'Puzzle', 'FPS'
+            ],
+            'Programming' => [
+                'Web' => [
+                    'HTML', 'CSS', 'PHP',
+                ],
+                'Database' => [
+                    'MySQL', 'PostgreSQL', 'MongoDB',
+                ],
+            ],
+            'DIY' => [
+                'Painting', 'Gardening',
+            ],
+            'News' => [
+                'World', 'Local',
+            ]
+        ];
+
+        foreach ($terms as $key => $val) {
+            $parent = $this->addTerm($manager, $category, $key, null);
+            $this->addTerms($manager, $category, $val, $parent);
         }
 
         $tag = $this->getReference('Taxonomy::tag');
@@ -35,5 +55,27 @@ class TermFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
+    }
+
+    public function addTerms($manager, $category, $terms, $parent)
+    {
+        foreach ($terms as $key => $val) {
+            if (is_array($val)) {
+                $parent = $this->addTerm($manager, $category, $key, $parent);
+                $this->addTerms($manager, $category, $val, $parent);
+            }
+            else {
+                $this->addTerm($manager, $category, $val, $parent);
+            }
+        }
+    }
+
+    public function addTerm($manager, $category, $name, $parent)
+    {
+        $term = new Term($category, $name);
+        $term->setDescription(sprintf('My my description for my %s Category', $name));
+        $term->setParent($parent);
+        $manager->persist($term);
+        return $term;
     }
 }
